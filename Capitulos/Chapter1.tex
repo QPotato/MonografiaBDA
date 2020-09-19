@@ -2,49 +2,125 @@
 
 \section{Introducción}
 
-Los Sistemas de Bases de Datos Espaciales (SDBMS) son los DBMS que incorporan capacidades de representación y manipulación de datos geométricos en un marco de referencia.
+% Que es una base de datos espacial
+%TODO: mejorar
+Los sistemas de bases de datos espaciales (SDBMS) son los DBMS que incorporan capacidades de representación y manipulación de
+datos geométricos en un marco de referencia dado.
 
-La principal aplicación de los SDBMS son los Sistemas de Información Geográfica (GIS): software que provee mecanismos de análisis y visualización de de datos geográficos. Los datos geográficos son datos espaciales cuyo marco de referencia  es la superficie terrestre. Los GIS implementan en sus herramientas un gran conjunto de técnicas desarrolladas por cartógrafos y que son previas al desarrollo de la informática. Este hecho dota a la investigación de las Bases de Datos Espaciales de un \emph{carácter multidisciplinario} que puede señalarse como una de las causas del rápido avance de la misma.
+% GIS
+La principal aplicación de los SDBMS son los Sistemas de Información Geográfica (GIS): software que provee mecanismos de análisis
+y visualización de de datos geográficos. Los datos geográficos son datos espaciales cuyo marco de referencia  es la superficie terrestre.
+Los GIS implementan en sus herramientas un gran conjunto de técnicas desarrolladas por cartógrafos y que son previas al desarrollo de la informática.
+Este hecho dota a la investigación de las Bases de Datos Espaciales de un \emph{carácter multidisciplinario} que puede señalarse como
+una de las causas del rápido avance de la misma.
 
-A su vez, existen otras aplicaciones para los SDBMS tales como la representación de circuitos, datos astronómicos, moléculas y muchas otras. En general, los modelos teóricos son los mismos y lo que cambia es simplemente el marco de referencia en el que se representan los datos. En este trabajo haremos foco en las aplicaciones a los GIS pero, el lector no debe perder de vista que todos los conceptos discutidos son aplicables a estas otras áreas.
+% Otras aplicaciones
+A su vez, existen otras aplicaciones para los SDBMS tales como la representación de circuitos, datos astronómicos, moléculas y muchas otras.
+En general, los modelos teóricos son los mismos y lo que cambia es simplemente el marco de referencia en el que se representan los datos.
+En este trabajo haremos foco en las aplicaciones a los GIS, pero el lector no debe perder de vista que todos los conceptos discutidos
+son aplicables a estas otras áreas.
 
 \section{Modelos Teóricos}
-El desarrollo de modelos teóricos para las Bases de Datos Espaciales debe entenderse en el contexto histórico discutido en la sección anterior. Los primeros GIS implementaban todas las operaciones sobre datos espaciales a nivel de aplicación, guardando sus datos en bases de datos convencionales. A su vez, los primeros SDBMS intentaron simplemente mover esta lógica al nivel de base de datos, pero sin desarrollar un marco teórico. 
+
+% Contexto
+El desarrollo de modelos teóricos para las Bases de Datos Espaciales debe entenderse en el contexto histórico discutido en la sección anterior.
+Los primeros GIS implementaban todas las operaciones sobre datos espaciales a nivel de aplicación,
+guardando sus datos en bases de datos convencionales.
+A su vez, los primeros SDBMS intentaron simplemente mover esta lógica al nivel de base de datos, pero sin desarrollar un marco teórico.
 Posteriormente, algunos investigadores comenzaron a dar definiciones formales de Tipos de Datos Espaciales (SDTs).
 
-En las secciones 2.2.1 y 2.2.2 analizaremos brevemente el Álgebra de RoSE (Robust Spatial Extension), un modelo formal que consideramos uno de los más elegantes y significativos del campo. Luego, en las secciones 2.2.3 y 2.2.4 veremos los principales paradigmas de modelado que se utilizan en los SDBMS actuales, el modelo funcional y el modelo basado en objetos.
+% Org de la seccion
+En las secciones \ref{realms:1} y \ref{realms:2} analizaremos brevemente el Álgebra de RoSE \cite{rose} (Robust Spatial Extension),
+un modelo formal que consideramos uno de los más elegantes y significativos del campo.
+Luego, en las secciones 2.2.3 y 2.2.4 veremos los principales paradigmas de modelado que se utilizan en los SDBMS actuales,
+el modelo funcional y el modelo basado en objetos.
 
-\subsection{Realms}
+\subsection{Realms} \label{realms:1}
 
-Según Güting y Schneider, un modelo formal para Bases de Datos Espaciales debe ser:
+Según Güting y Schneider \cite{rose}, un modelo formal para Bases de Datos Espaciales debe ser:
 \begin{itemize}
-    \item General: los objetos geométricos usados como valores de SDTs deben ser tan generales como sea posible. Por ejemplo, un valor región debe poder representar una colección de áreas disjuntas, cada una de las cuales puede tener agujeros. Mas precisamente, los dominios de los tipos de datos punto, línea y región deben ser cerrados respecto a la unión, intersección y diferencia de sus conjuntos de puntos subyacentes.
-    \item Riguroso: a semántica de los SDTs, es decir, los posibles valores para los tipos y las funciones asociadas con las operaciones, deben estar definidas formalmente para evitar ambigüedades para el usuario y el implementador.
-    \item De resolución finita: las definiciones formales deben tener en cuenta las capacidades de representación finitas de las computadoras. Delegarle al programador la responsabilidad de cerrar la brecha entre teoría y práctica en este punto lleva a errores numéricos y topológicos.
-    \item Geométricamente consistente: distintos objetos espaciales pueden estar pueden estar relacionados mediante restricciones geométricas. Las definiciones de los SDTs ayudar a mantener esa consistencia.
+    \item General: los objetos geométricos usados como valores de SDTs deben ser tan generales como sea posible.
+        Por ejemplo, un valor región debe poder representar una colección de áreas disjuntas, cada una de las cuales puede tener agujeros.
+        Mas precisamente, los dominios de los tipos de datos punto, línea y región deben ser cerrados respecto a la unión,
+        intersección y diferencia de sus conjuntos de puntos subyacentes.
+    \item Riguroso: la semántica de los SDTs, es decir, los posibles valores para los tipos y las funciones asociadas con las operaciones,
+        deben estar definidas formalmente para evitar ambigüedades para el usuario y el implementador.
+    \item De resolución finita: las definiciones formales deben tener en cuenta las capacidades de representación finitas de las computadoras
+        Delegarle al programador la responsabilidad de cerrar la brecha entre teoría y práctica en este punto lleva a errores numéricos y topológicos.
+    \item Geométricamente consistente: distintos objetos espaciales pueden estar pueden estar relacionados mediante restricciones geométricas.
+        Las definiciones de los SDTs ayudar a mantener esa consistencia.
 \end{itemize}
 
-El Álgebra de RoSE se basa en la incorporación a los DMBSs del concepto de realm, un conjunto finito de puntos y segmentos sin intersecciones sobre los cuales se posicionan todos los datos espaciales de una base de datos. Con este enfoque, los datos no se crean al darle valor a un atributo, sino que se \emph{seleccionan} del conjunto de valores existentes en el realm. Este modelo permite asegurar que el álgebra espacial es cerrada respecto a un realm. Es decir que la primitivas geométricas y las operaciones sobre realms se definen sobre aritmética entera, libre de errores de redondeo que podrían aparecer si el modelo se definiera sobre un espacio euclídeo.
+% Resumen
+El Álgebra de RoSE se basa en la incorporación a los DMBSs del concepto de realm, un conjunto finito de puntos y segmentos sin intersecciones
+sobre los cuales se posicionan todos los datos espaciales de una base de datos.
+Con este enfoque, los datos no se crean al darle valor a un atributo, sino que se \emph{seleccionan} del conjunto de
+valores existentes en el realm.
+Este modelo permite asegurar que el álgebra espacial es cerrada respecto a un realm.
+Es decir, que la primitivas geométricas y las operaciones sobre realms se definen sobre
+aritmética entera, libre de errores de redondeo que podrían aparecer si el modelo se definiera sobre un espacio euclídeo.
 
-Otra ventaja de los realms es que permiten aislar todo el computo de puntos en las operaciones de actualización del realm. No se computan intersecciones durante consultas.
+% Computo complejo en los inserts y updates, no en busquedas.
+Otra ventaja de los realms es que permiten aislar todo el computo de puntos en las operaciones de actualización del realm.
+No se computan intersecciones durante consultas de búsqueda.
 
-Para mapear los segmentos con intersecciones de una aplicación a un conjunto de segmentos sin intersecciones de un realm, se utiliza redibujado y geometría de resolución finita (Greene y Yao, 1986).
+% Finite resolution
+Para mapear los segmentos con intersecciones de una aplicación a un conjunto de segmentos sin intersecciones de un realm,
+se utiliza redibujado y geometría de resolución finita \cite{finite:resolution}.
 
-\subsection{Actualizaciones en realms}
+\subsection{Actualizaciones en realms} \label{realms:2}
 
-Veamos mas en detalle que ocurre en este modelo cuando se realiza una actualización que requiere la insercion de un nuevo segmento. Esto es importante porque los datos geométricos provenientes de la aplicación no son no-intersecantes como requiere el modelo. El problema fundamental es que usualmente los puntos de intersección no se corresponden con puntos de la grilla del realm. La solución es aplicar redibujado: se modifican los segmentos de forma tal que la intersección se mueva al punto mas cercano que sí esté en la grilla.
+% Redibujado
+Veamos mas en detalle que ocurre en este modelo cuando se realiza una actualización que requiere la insercion de un nuevo segmento.
+Esto es importante porque los datos geométricos provenientes de la aplicación no son no-intersecantes como requiere el modelo.
+El problema fundamental es que usualmente los puntos de intersección no se corresponden con puntos de la grilla del realm.
+La solución es aplicar redibujado:
+se modifican los segmentos de forma tal que la intersección se mueva al punto mas cercano que sí esté en la grilla.
 
-Esto puede verse en la figura 1: la intersección entre los segmentos A y B (D') no se corresponde con un punto de la grilla, pero podemos partir a cada uno de ellos en dos, de manera que todos los segmentos resultantes tengan a D como uno de sus extremos.
+% Ejemplo de redibujado
+Esto puede verse en las figuras \ref{fig:realms:redibu:a} y \ref{fig:realms:redibu:b}:
+la intersección entre los segmentos A y B (D') no se corresponde con un punto de la grilla,
+pero podemos partir a cada uno de ellos en dos, de manera que todos los segmentos resultantes tengan a Dcomo uno de sus extremos.
 
-[figura del paper]
+\begin{figure}
+    \centering
+    \begin{subfigure}[b]{0.3\textwidth}
+        \includegraphics[width=\textwidth]{fig-realms-a.png}
+        \caption{}
+        \label{fig:realms:redibu:a}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\textwidth}
+        \includegraphics[width=\textwidth]{fig-realms-b.png}
+        \caption{}
+        \label{fig:realms:redibu:b}
+    \end{subfigure}
+    \caption{Redibujado de la intersección de dos segmentos.}
+    \label{fig:realms:redibu}
+\end{figure}
 
-Pero ahora nos surge un nuevo problema que es la preocupación de que aplicando esta operación sucesivamente los segmentos se modifiquen cada vez mas, introduciendo cada vez mas error en la representacion.
+% Envolturas
+Pero ahora nos surge un nuevo problema que es la preocupación de que aplicando esta operación sucesivamente
+los segmentos se modifiquen cada vez mas, introduciendo cada vez mas error en la representacion.
+Podemos acotar este error que se introduce, usando el concepto de envoltura.
+La envoltura de un segmento es el conjunto de puntos de la grilla que se encuentran inmediatamente arriba, debajo o sobre el segmento.
+Si establecemos entonces la restriccion de que los puntos a usar para el redibujado deben caer sobre la envoltura del segmento,
+tenemos una cota para el error: la distancia entre puntos en la grilla.
+La figura \ref{fig:realms:envoltura} muestra un ejemplo de envoltura de un segmento.
 
-Podemos acotar este error que se introduce, usando el concepto de envoltura de un segmento. La envoltura de un segmento es el conjunto de puntos de la grilla que se encuentran inmediatamente arriba, debajo o sobre el segmento. Si establecemos entonces la restriccion de que los puntos a usar para el redibujado deben caer sobre la envoltura del segmento, tenemos una cota para el error (la distancia entre puntos en la grilla).
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{fig-realms_envoltura.png}
+    \caption{Envoltura de un segmento.}
+    \label{fig:realms:envoltura}
+\end{figure}
 
-De esta forma, Güting y Schneider definen un conjunto de operaciones geométricas primitivas robustas con error acotado que son la base para, a través de la composición de las mismas, definir de forma rigurosa todos los SDTs y las operaciones geométricas que nos pueden resultar interesantes para la representación de datos espaciales.
-
-Si bien el Álgebra de RoSE fue un hito en términos de rigurosidad teórica en los modelos de bases de datos espaciales, no es utilizada actualmente en ninguno de los SDBMSs actualmente en uso por la industria del software. De todas formas, su influencia puede verse en los modelos que se utilizan actualmente y que veremos a continuación.
+% Conclusion
+De esta forma, Güting y Schneider definen un conjunto de operaciones geométricas primitivasrobustas con error acotado que son la base para,
+a través de la composición de las mismas, definir de forma rigurosa todos los SDTs
+y las operaciones geométricas que nos pueden resultar interesantes para la representación de datos espaciales.
+Si bien el Álgebra de RoSE fue un hito en términos de rigurosidad teórica en los modelos de bases de datos espaciales,
+no es utilizada actualmente en ninguno de los SDBMSs actualmente en uso por la industria del software.
+De todas formas, su influencia puede verse en los modelos que se utilizan actualmente y que veremos a continuación.
 
 \subsection{Modelo Funcional}
 
@@ -54,7 +130,7 @@ En esta sección, veremos el modelo funcional o modelo orientado a campos. Comen
     \item Un conjutno de instalaciones (oficinas, zonas de campamento, estaciones de bomberos).
     \item Un conjunto de caminos.
     \item Un conjunto de ríos.
-    \item un administrador
+    \item Un administrador
 \end{itemize}
 
 En el modelo funcional, se pueden modelar los bosques del parque nacional como una función cuyo dominio es es el espacio geográfico subyacente y el rango es un conjunto de especies de árboles. En este caso, la función es una step-function (constante donde en un mismo bosque y con saltos en los bordes entre bosques).
