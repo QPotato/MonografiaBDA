@@ -6,7 +6,7 @@
 #
 # Por el mismo motivo necesitamos hacer clean antes de buildear.
 
-MAINTEX = Tesis
+MAINTEX = monografia
 SLIDES = slides
 CARTA = carta
 CP = cp
