@@ -115,7 +115,7 @@ La figura \ref{fig:realms:envoltura} muestra un ejemplo de envoltura de un segme
 \end{figure}
 
 % Conclusion
-De esta forma, Güting y Schneider definen un conjunto de operaciones geométricas primitivasrobustas con error acotado que son la base para,
+De esta forma, Güting y Schneider definen un conjunto de operaciones geométricas primitivas robustas con error acotado que son la base para,
 a través de la composición de las mismas, definir de forma rigurosa todos los SDTs
 y las operaciones geométricas que nos pueden resultar interesantes para la representación de datos espaciales.
 Si bien el Álgebra de RoSE fue un hito en términos de rigurosidad teórica en los modelos de bases de datos espaciales,
@@ -124,47 +124,69 @@ De todas formas, su influencia puede verse en los modelos que se utilizan actual
 
 \subsection{Modelo Funcional}
 
-En esta sección, veremos el modelo funcional o modelo orientado a campos. Comenzaremos presentando un ejemplo de un problema espacial a modelar. Supongamos un parque nacional que cuenta con:
+% Intro y ejemplo
+En esta sección, veremos el modelo funcional o modelo orientado a campos.
+Comenzaremos presentando un ejemplo de un problema espacial a modelar. Supongamos un parque nacional que cuenta con
+un conjunto de bosques, cada uno con una especie de árbol dominante.
+
+% Ejemplo en funcional
+En el modelo funcional, se pueden modelar los bosques del parque nacional como
+una función cuyo dominio es el conjunto de puntos en el mapa del parque nacional y el rango es un conjunto de especies de árboles.
+En este caso, se trata de una funcion escalonada (constante dentro en un mismo bosque y con saltos en los bordes entre bosques).
+
+
+% Componentes de un modelo funcional
+En general, para modelar un problema usando el paradigma funcional, se deben definir tres componentes \cite{worboyz}:
 \begin{itemize}
-    \item Un conjunto de bosques, cada uno con una especie de árbol dominante.
-    \item Un conjutno de instalaciones (oficinas, zonas de campamento, estaciones de bomberos).
-    \item Un conjunto de caminos.
-    \item Un conjunto de ríos.
-    \item Un administrador
+    \item Un sistema de referencia espacial: una grilla finita sobre el espacio subyacente,
+    similar al concepto que presentamos en la sección \ref{realms:1} sobre el Algebra de RoSE.
+    El ejemplo mas conocido es un sistema de referencia de la tierra por latitud y longitud.
+    \item Campos simples: un conjunto finito de funciones computables $\{f_i: SF \rightarrow A_i, 1 \le i \le n\}$
+    donde SF es el sistema de referencia espacial y los $A_i$ son dominios de atributos. La elecciones de estos dominios de atributos
+    y las funciones que asignan elementos de los mismos a cada punto del espacio dependerá de la aplicación en cuestión.
+    \item Operaciones de campos: especifican las relaciones e interacciones entre los distintos campos. Estas se dividen en:
+    \begin{itemize}
+        \item Operaciones locales: operaciones en las que el valor del campo resultante solo depende de los valores de los campos de entrada en ese punto.
+        La composición de campos es un ejemplo de operación local.
+        \item Operacioes focales: operaciones en las que el valor del campo resultante depende de los valores de los campos en un pequeña vecindad alrededor del punto.
+        Este es el caso por ejemplo de operaciones que involucran gradientes.
+        \item Operaciones zonales: operaciones que involucran operadores agregados como el promedio o la integración. También son operaciones
+        zonales aquellas que particionan el espacio en zonas.
+    \end{itemize}
 \end{itemize}
 
-En el modelo funcional, se pueden modelar los bosques del parque nacional como una función cuyo dominio es es el espacio geográfico subyacente y el rango es un conjunto de especies de árboles. En este caso, la función es una step-function (constante donde en un mismo bosque y con saltos en los bordes entre bosques).
-
-En general, para modelar un problema usando el paradigma funcional, se deben definir tres componentes: un sistema de referencia espacial, funciones de campos y operaciones de campos [Worboys, 1995].
-
-Un sistema de referencia espacial es una grilla finita sobre el espacio subyacente. El ejemplo mas conocido de sistema de referencia espacial es un sistema de referencia de la tierra por latitud y longitud.
-
-Un conjunto finito de n funciones computables o campos simples {fi, 1 <= i <= n},
-
-[funcion]
-
-asigna a cada punto del sistema de referencia F un elemento de un conjunto valores de atributos.
-
-Las relaciones e interacciones entre los diferentes campos se representan con operaciones de campos. Las operaciones de campos mapean un subconjunto de campos en otros campos. La unión + y la composición [TODO: signos de operaciones] son ejemplos de operaciones de campos:
-
-[definiciones]
-
-Las operaciones de campos pueden clasificarse en locales, focales y zonales. Los resultados de las operaciones locales dependen solo de los valores de la entrada en esa ubicación, mientras que las focales dependen también de los valores alrededor de la entrada. Las operaciones zonales trabajan con datos agregados o integraciones.
-
-Los modelos funcionales son buenos para representar problemas en los que las datos continuos como elevación, temperatura y variación del suelo. Tienen la ventaja de poder representar fenómenos espaciales amorfos o con contornos fluidos.
+% Ventajas de funcional
+Los modelos funcionales son buenos para representar problemas en los que las datos continuos
+como elevación, temperatura y variación del suelo.
+Tienen la ventaja de poder representar fenómenos espaciales amorfos o con contornos fluidos.
 
 \subsection{Modelos Basados en Objetos}
 
-Volviendo al ejemplo del parque nacional, si consideramos los lugares donde los bosques cambian, en un entorno idealizado donde los bordes entre bosques están claramente definidos, obtendremos un bordes de de polígonos. A cada polígono se le puede asignar una ID y un atributo no espacial (la especie de árbol dominante). Los bosques del parque pueden modelarse entonces como un conjunto de polígonos.
+% Ejemplo en objetos
+Volviendo al ejemplo del parque nacional, si consideramos los lugares donde los bosques cambian,
+en un entorno idealizado donde los bordes entre bosques están claramente definidos, obtendremos los bordes de polígonos.
+A cada polígono se le puede asignar un identificador y un atributo no espacial (la especie de árbol dominante).
+Los bosques del parque pueden modelarse entonces como un conjunto de polígonos.
 
-En el modelado basado en objetos, se abstrae información espacial en conjuntos de entidades únicas, distinguibles y relevantes llamadas objetos. Cada objeto tiene un conjunto de atributos que lo caracterizan, los cuales se dividen en atributos espaciales y no espaciales. En el ejemplo del parque nacional, un objeto bosque tiene un atributo espacial, un polígono, que representa su extensión espacial, y un atributo no espacial, su espacie dominante, representada como un valor alfanumérico. Es interesante notar que un objeto puede tener varios atributos espaciales. Por ejemplo, un camino puede tener un polígono y una línea, para elegir cuál usar según la escala del mapa.
+% definicion objetos
+En el modelado basado en objetos, se abstrae información espacial en conjuntos de
+entidades únicas, distinguibles y relevantes llamadas objetos.
+Cada objeto tiene un conjunto de atributos que lo caracterizan, los cuales se dividen en atributos espaciales y no espaciales.
+En el ejemplo del parque nacional, un objeto bosque tiene un atributo espacial, un polígono, que representa su extensión espacial,
+y un atributo no espacial, su espacie dominante, representada como un valor alfanumérico.
+Es interesante notar que un objeto puede tener varios atributos espaciales.
+Por ejemplo, un camino puede tener un polígono y una línea, para elegir cuál usar según la escala del mapa.
 
-Los modelos de objetos son los mas comunes en problemas relacionados a representar redes de transportes o parcelas de tierra. Tienen la ventaja de ser mas intuitivos y cercanos a los modelos Entidad-Relación ya muy presentes en los DBMS más usados. En definitiva, la decisión de usar el paradigma funcional o de en objetos se basará en los requerimientos de la aplicación.
+% Ventajas objetos
+Los modelos de objetos son los mas comunes en problemas relacionados a representar redes de transportes o parcelas de tierra.
+Tienen la ventaja de ser mas intuitivos y cercanos a los modelos Entidad-Relación ya muy presentes en los DBMS más usados.
+En definitiva, la decisión de usar el paradigma funcional o de en objetos se basará en los requerimientos de la aplicación.
 
 En las próximas secciones, detallaremos más los SDTs y operaciones espaciales en el modelo basado en objetos.
 
 \subsection{SDTs}
-Se han propuesto muchos conjuntos básicos de tipos espaciales para la representación de formas comunes en mapas. Actualmente, la más adoptada es el estándar OGIS [OGIS, 1999] y es en la que nos basaremos.
+Se han propuesto muchos conjuntos básicos de tipos espaciales para la representación de formas comunes en mapas.
+Actualmente, la más adoptada es el estándar OGIS [OGIS, 1999] y es en la que nos basaremos.
 El estándar OGIS propone los siguientes tipos de datos:
 \begin{itemize}
     \item Geometría: es un tipo abstracto (no puede ser instanciado) del cual se derivan todos los otros tipos. Tiene asociado un sistema de referencia.
