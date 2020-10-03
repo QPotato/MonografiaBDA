@@ -2,6 +2,9 @@
 
 \section{Introducción}
 
+% Datos Espaciales
+%TODO
+
 % Que es una base de datos espacial
 %TODO: mejorar
 Los sistemas de bases de datos espaciales (SDBMS) son los DBMS que incorporan capacidades de representación y manipulación de
@@ -30,6 +33,7 @@ A su vez, los primeros SDBMS intentaron simplemente mover esta lógica al nivel 
 Posteriormente, algunos investigadores comenzaron a dar definiciones formales de Tipos de Datos Espaciales (SDTs).
 
 % Org de la seccion
+%TODO: rehacer esto al final
 En las secciones \ref{realms:1} y \ref{realms:2} analizaremos brevemente el Álgebra de RoSE \cite{rose} (Robust Spatial Extension),
 un modelo formal que consideramos uno de los más elegantes y significativos del campo.
 Luego, en las secciones 2.2.3 y 2.2.4 veremos los principales paradigmas de modelado que se utilizan en los SDBMS actuales,
@@ -162,6 +166,7 @@ Tienen la ventaja de poder representar fenómenos espaciales amorfos o con conto
 
 \subsection{Modelos Basados en Objetos}
 
+%TODO: \cite{oo:spatial}
 % Ejemplo en objetos
 Volviendo al ejemplo del parque nacional, si consideramos los lugares donde los bosques cambian,
 en un entorno idealizado donde los bordes entre bosques están claramente definidos, obtendremos los bordes de polígonos.
@@ -185,29 +190,60 @@ En definitiva, la decisión de usar el paradigma funcional o de en objetos se ba
 En las próximas secciones, detallaremos más los SDTs y operaciones espaciales en el modelo basado en objetos.
 
 \subsection{SDTs}
+
 Se han propuesto muchos conjuntos básicos de tipos espaciales para la representación de formas comunes en mapas.
-Actualmente, la más adoptada es el estándar OGIS [OGIS, 1999] y es en la que nos basaremos.
+Actualmente, la más adoptada es el estándar OGIS \cite{99opengis} y es en la que nos basaremos.
 El estándar OGIS propone los siguientes tipos de datos:
 \begin{itemize}
-    \item Geometría: es un tipo abstracto (no puede ser instanciado) del cual se derivan todos los otros tipos. Tiene asociado un sistema de referencia.
-    \item Punto: describe la posicion de objetos de cero dimensiones, como una oficina o una zona de campamento, en el caso del parque nacional.
-    \item Cadena de Lineas: describe un objeto de una dimension a través de una sucesión de de dos o mas puntos, que pueden representar un segmento o aproximar una curva. Por ejemplo, caminos o ríos.
+    \item Geometría: es un tipo abstracto (no puede ser instanciado) del cual se derivan todos los otros tipos.
+    Tiene asociado un sistema de referencia.
+    \item Punto: describe la posicion de objetos de cero dimensiones,
+    como una oficina o una zona de campamento, en el caso del parque nacional.
+    \item Cadena de Lineas: describe un objeto de una dimension a través de una sucesión de de dos o mas puntos,
+    que pueden representar un segmento o aproximar una curva. Por ejemplo, caminos o ríos.
     \item Polígono: objetos de 2 dimensiones, como un bosque.
-    \item Colección de Geometrías: formas complejas formadas por conjuntos de otros tipos. Se dividen en multipuntos, multilineas y multipoligonos. Estos tipos son necesarios para asegurar que las operaciones geométricas sean cerradas. Por ejemplo, la intersección de un río con un bosque de forma cóncava pueden ser varias líneas.
+    \item Colección de Geometrías: formas complejas formadas por conjuntos de otros tipos.
+    Se dividen en multipuntos, multilineas y multipoligonos.
+    Estos tipos son necesarios para asegurar que las operaciones geométricas sean cerradas.
+    Por ejemplo, la intersección de un río con un bosque de forma cóncava pueden ser representado por un conjunto de líneas.
 \end{itemize}
 
 \subsection{Operaciones Espaciales}
 
-En el modelo funcional, las operaciones disponibles quedaban definidas por las funciones de campos del modelo. Pero en un modelo basado en objetos, el espacio subyacente será el que determine las operaciones disponsibles y las relaciones que pueden existir entre objetos. 
+% Taxonnomía
+En el modelo funcional, las relaciones disponibles quedaban definidas por las funciones de campos del modelo.
+Pero en un modelo basado en objetos, el espacio subyacente será el que determine las operaciones disponsibles
+y las relaciones que pueden existir entre objetos. La siguiente tipología de espacios resume la presentada por \cite{spatial:book}:
 
 \begin{itemize}
-    \item Orientado a Conjuntos: son los espacios mas simples y generales. Permiten todas las relaciones usuales de conjuntos como unión, intersección, contención y pertenencia.
-    \item Topológicos: los espacios topológicos son aquellos en los que las relaciones no se ven afectadas por transformaciones elásticas del mismo. Relaciones como meet, within y overlap son ejemplos de ejemplos de las disponibles en espacios topológicos.
+    \item Espacios Orientados a Conjuntos: son los espacios mas simples y generales.
+    Permiten todas las relaciones usuales de conjuntos como unión, intersección, contención y pertenencia.
+    \item Espacios Topológicos: los espacios topológicos son aquellos en los que las relaciones no se ven afectadas
+    por transformaciones elásticas del mismo.
+    \item Espacios Direccionales: las reaciones direccionales de un espacio pueden ser
+    absolutas (en referencia a un sistema de referencia global),
+    relativas (basadas en la orientación de un objeto)
+    o basadas en un observador (un objeto especial designado como tal).
+    \item Espacios Métricos: son aquellos espacios en los que la noción de distancia está bien definida. La función de distancia puede usarse
+    para definir una topología y por lo tanto todo espacio métrico es también un espacio topológico.
+    \item Espacios Euclideanos: Son espacios en los que los puntos pueden expresarse como la combinación lineal de los elementos de
+    un sistema de referencia. Sobre espacios euclideanos pueden definirse todas las operaciones de las categorías anteriores.
 \end{itemize}
 
-[operaciones dinamicas]
+%TODO: una tabla con operaciones espaciales
 
-\section{Expandiendo sobre el espacio} \label{sec:e4}
-[Generalizacion a N dimensiones]
+\section{Procesamiento de consultas espaciales}
 
-[El espacio como indice universal]
+% Presentacion de filter-refine
+En esta sección exploraremos una técnica para la optimización de consultas espaciales sumamente imporante,
+el paradigma de filtrado y refinamiento.
+
+% Consultas declarativas
+Los usuarios expresan las consultas a un motor de bases de datos utilizando un lenguaje declarativo como SQL.
+Esto quiere decir que el usuario solo define qué resultado quiere, pero es responsabildiad del motor de bases de datos
+determinar cuál es el proceso más eficiente para llegar a ese resutado y luego ejecutarlo. A esto le llamamos procesamiento de consultas.
+
+% Consultas single-scan vs multi-scan
+Las consultas a su vez, pueden dividirse en las de escaneo simple o escaneo múltiple.
+Es una consula de escaneo simple,cada registro de una tabla deberá ser accedido a lo sumo una vez durante el procesamiento de la consulta.
+La operación Join es el ejemplo típico de una operación de escaneo múltiple
