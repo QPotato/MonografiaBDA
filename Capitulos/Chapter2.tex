@@ -33,18 +33,18 @@ Por último, en la sección \ref{sec:sql2011} veremos como estos conceptos fuero
 % Intro
 Para poder plantear una implementación de una base de datos temporal es necesario comprender primero
 cómo se comporta y cómo se observa el tiempo.
-A lo largo de esta sección veremos algunos modelos y representaciones del mismo junto con
-las elecciones de diseño para poder plantear una solución a los problemas temporales.
-
-\subsection{La estructura del tiempo}
 
 % Something something empieza teórico
 En el cápitulo anterior vimos como la investigación de bases de datos espaciales se vio motivada por
 la necesidad práctica de mejorar el manejo de datos de los sistemas GIS.
 Las bases de datos temporales por su parte, fueron fuertemente impactadas por
-la investigación previa en lógica temporal de los años 70 \cite{temporal:status:directions}.
+la investigación previa en lógica temporal desde de los años 70\textsuperscript{\cite{temporal:status:directions}}
+y que presentaremos a continuación.
+
+\subsection{La estructura del tiempo}
+
 Los trabajos fundacionales de la lógica temporal han dividido el estudio del tiempo en dos modelos estructurales principales:
-\concept{lineal} y \concept{ramificado} \cite{temporal:snodgrass}.
+\concept{lineal} y \concept{ramificado}\textsuperscript{\cite{temporal:snodgrass}}.
 Comenzaremos entonces por estudiar estos modelos y luego mencionaremos brevemente otras posibilidades.
 
 \subsubsection{Modelo Lineal}
@@ -64,10 +64,10 @@ Por ejemplo: registros de transacciones de un banco, sistemas de control de inve
 
 \subsubsection{Modelo ramificado}
 
-A diferencia del modelo anterior, el tiempo se presenta dos formas:
-se extiende de forma lineal desde el pasado hacia el presente formando una secuencia.
-Podemos visualizar este modelo en la figura \ref{fig:branched-time-model}
+A diferencia del modelo anterior, el tiempo se presenta en dos formas:
+se extiende de forma lineal desde el pasado hacia el presente formando una secuencia
 y se ramifica del presente al futuro creando un árbol con raíz en el \textit{ahora} cuyas ramas se extienden hacia el futuro.
+Podemos visualizar este modelo en la figura \ref{fig:branched-time-model}.
 
 \begin{figure}
     \centering
@@ -81,15 +81,14 @@ Debido a sus características es útil para representar y trabajar con informaci
 
 \subsubsection{Elección entre estructuras temporales}
 
-%TODO: revisar
 Los modelos más generales del tiempo en la lógica temporal representan el tiempo como un conjunto arbitrario
 que cumple con la restricción de ser un \textit{orden parcial}.
 Otros axiomas introducen otros modelos más refinados del tiempo.
-Por ejemplo: el tiempo lineal puede ser simplificado agregando un axioma imponiendo un \textit{orden total} en este conjunto.
+Por ejemplo: el tiempo lineal puede ser simplificado agregando un axioma que imponga un \textit{orden total} en este conjunto.
 Un modelo recurrente, por otra parte, puede trabajarse con un \textit{modelo cíclico} del tiempo.
 
 A lo largo de este trabajo se utilizará un modelo lineal del tiempo ya que es el más sencillo
-y brinda todas las característicasnecesarias en las bases de datos temporales.
+y brinda todas las características necesarias en las bases de datos temporales.
 
 \subsection{La densidad del tiempo}
 
@@ -106,10 +105,9 @@ Estas reciben el nombre de \concept{chronons}.
 \subsubsection{Modelos Densos}
 
 Por su parte, los modelos densos presentan dos variaciones: pueden ser isomorfos tanto a los números racionales como a los reales.
-Como consecuencia, dados dos momentos cualquiera en el tiempo existe otro momento entre ellos.
+Como consecuencia, dados dos momentos cualquiera en el tiempo, existe otro momento entre ellos.
 
 Los modelos isomorfos a los reales también son conocidos como continuos.
-En ellos cada número real corresponde a un punto en el tiempo.
 
 \subsubsection{\textit{Chronons} y la elección del modelo de densidad}
 
@@ -123,16 +121,15 @@ Existen varias razones para esta elección entre las que se destacan cuatro:
     \item Las medidas del tiempo son inherentemente imprecisas.
     Los instrumentos de medición temporal invariablemente reportan la ocurrencia de eventos en términos de chronons, no en “puntos” de tiempo.
     Por lo tanto, incluso los eventos así llamados “instantáneos” pueden ser medidos como si hubieran ocurrido durante un chronon, en el mejor de los casos.
-    \item Las referencias del lenguaje más naturales del tiempo son compatibles con el modelo discreto del tiempo.
+    \item La mayor parte de las referencias temporales del lenaguaje natural son compatibles con el modelo discreto del tiempo.
     Por ejemplo, cuando se dice que un evento ocurrió a las 4:30 PM,
-    en realidad no se hace referencia a que el evento ocurrió en el “punto” del tiempo asociado a las 4:302 PM,
-    sino a algún momento en el chronon asociado con las 4:30 PM aunque exista una variación de uno o dos minutos.
-    \item Los conceptos de chronon y de intervalo permiten modelar naturalmente eventos que no son instantáneos pero que tienen duración.
+    en realidad no se hace referencia a que el evento ocurrió en el “punto” del tiempo asociado a las 4:30 PM,
+    sino a algún momento cercano a las 4:30 PM aunque exista una variación de uno o dos minutos.
+    \item Los conceptos de chronon y de intervalo permiten modelar naturalmente eventos que no son instantáneos sino que tienen duración.
     \item Cualquier implementación de un modelo de datos con dimensión temporal tendrá la necesidad de codificar el tiempo de forma discreta,
-    es decir, que es inevitable discretizar el tiempo en algún punto.
-    Este problema es análogo al que analisamos en el Álgebra de Rose.
+    Es decir que, es inevitable discretizar el tiempo en algún punto.
+    Este problema es análogo al que analisamos en el Álgebra de Rose en el capítulo anterior.
 \end{itemize}
-
 
 \section{\textit{Tiempo de Validez} y \textit{Tiempo de Transacción}} \label{sec:val:trans}
 %TODO: algun tipo de cita en todo esto. dios mio.
@@ -142,35 +139,35 @@ pasaremos a la cuestión de integrar estos conceptos a un modelo de bases de dat
 Como veremos, es útil definir dos categorías fundamentales de datos temporales:
 \textbf{tiempo de validez} y \textbf{tiempo de transacción}.
 
-Volviendo sobre la intuición que planteamos en la introduccion de este capitulo, llamaremos \concept{Bases de Datos Snapshot} a cualquier base de datos
+Volviendo sobre la intuición que planteamos en la introduccion de este capitulo, llamaremos \concept{bases de datos snapshot} a cualquier base de datos
 que no soporta capacidades temporales (independientemente de si tiene datos temporales en un sentido definido por el usuario).
 Como se aprecia en la figura \ref{fig:state-machine}, podemos modelar estas bases de datos como maquinas de estado finitas, en la que cada
 estado contiene solo los datos del presente y un cambio destruye los datos anteriores.
 
 \begin{figure}
     \centering
-    \includegraphics[scale=0.5]{fig-state-machine.jpg}
+    \includegraphics[scale=0.32]{fig-state-machine.jpg}
     \caption{Base de Datos Snapshot como una maquina de estos finita.}
     \label{fig:state-machine}
 \end{figure}
 
 Si nos interesa modelar los aspectos temporales propios del dominio del problema,
-podemos ampliar este modelo introduciendo el concepto de tiempo de validez, es decir, el tiempo cuando el dato es verdadero en la
-realidad modelada. Un dato puede tener asociados multiples instantes e intervalos de tiempo.
+podemos ampliar este modelo introduciendo el concepto de tiempo de validez,
+es decir el tiempo cuando el dato es verdadero en la realidad modelada.
+Un dato puede tener asociados multiples instantes e intervalos de tiempo de validez que representen diferentes atributos temporales del mismo.
 A este tiempo también se lo suele conocer como tiempo del mundo real o tiempo lógico.
 
-%TODO: mejorar esto.
 Por otro lado, si nos interesa mantener un registro histórico de los estados que recorrió la base de datos,
-introduciremos el tiempo de transacción, es decir, el tiempo en el cual el hecho es actual.
+introduciremos el tiempo de transacción, es decir el tiempo en el cual el hecho fue modelado por el usuario.
 Llamaremos \concept{consultas de viaje en el tiempo} a aquellas que especifiquen un tiempo de transacción distinto al presente.
 
 Es importante notar que estos dos tiempos no solo cumplen roles distintos y son independientes el uno del uno del otro,
 sino que ademas se comportaran distinto.
-Generalmente, el tiempo de validez sera ingresado por el usuario mientras que
+Generalmente, el tiempo de validez será ingresado por el usuario mientras que
 el tiempo de transacción es administrado por el motor de bases de datos.
 Como consecuencia de esto, un usuario no puede modificar los estados del pasado.
-Llamamos \concept{Base de Datos Bitemporal} a una base de datos que soporta tiempo de validez y tiempo de transacción
-y \concept{Base de Datos Unitemporal} a aquellas que solo soportan uno de estos tiempo.
+Llamaremos además \concept{base de datos bitemporal} a una base de datos que soporta ambos tiempos
+y \concept{base de datos unitemporal} a aquellas que solo soportan uno de ellos.
 
 \begin{figure}
     \centering
@@ -185,7 +182,7 @@ La versión 2011 de SQL\textsuperscript{\cite{sql2011}}, publicada en diciembre 
 Esta extensión se basa en el agregado de \concept{períodos temporales} a las tablas.
 La misma define dos variantes de períodos:
 de \concept{aplicación de usuario} (para tiempos de validez) y de \concept{versionado del sistema} (para tiempos de transacción).
-Los períodos se definen con dos columnas temporales (\textit{Date} o \textit{Timestamp}) de la tabla.
+Los períodos se definen con dos columnas temporales (tipos \textit{Date} o \textit{Timestamp}) de la tabla.
 Se prefirió esta forma en lugar de un tipo nuevo ya que es la que permite migrar más
 fácilmente sistemas previos al estándar.
 Además, como es común en el álgebra temporal, los periodos son \concept{cerrado-abierto},
@@ -193,7 +190,7 @@ es decir que contienen el momento de su inicio pero no de su finalización.
 
 \subsection{Períodos de Aplicación de Usuario}
 
-Veamos ahora un ejemplo de una tabla que define un periodo de aplicación de usuario.
+Veamos ahora un ejemplo de una tabla que define un periodo de aplicación de usuario:
 
 \begin{verbatim}
     CREATE TABLE Estudiantes (
@@ -233,18 +230,20 @@ En este caso, el período especificado está contenido en el período de la fila
 Pero entonces, ¿Cuál debería ser el nuevo período de validez de la fila actualizada?
 La respuesta es que en realidad, un \texttt{UPDATE} temporal se comporta un poco distinto uno tradicional.
 O, mas precizamente, es una generalización de este.
-Si consideramos que un \texttt{UPDATE} clásico inserta una fila en tabla por cada una que remueve,
-un \texttt{UPDATE} temporal puede crear varias filas (hasta tres) por cada fila que borra.
-En este caso, por ejemplo, el resultado seran tres filas como vemos en la tabla \ref{tab:update}
-De todas formas, si la tabla tuviera por definidos triggers en actualizaciones, la fila con \texttt{carrera = 2} se considera la actualizada.
+Si consideramos que un \texttt{UPDATE} clásico inserta una fila en la tabla por cada una que remueve,
+un \texttt{UPDATE} temporal puede crear varias filas (hasta tres) por cada una que borra.
+En este caso, por ejemplo, el resultado seran tres filas, como vemos en la tabla \ref{tab:update}.
+De todas formas, si la tabla tuviera definidos triggers para las actualizaciones,
+la fila con \texttt{carrera = 2} se considera como la actualizada.
+
 \begin{table}[]
-    \begin{tabular}{llll}
-    Legajo & EStart     & EEnd       & ECarrera \\
+    \center \begin{tabular}{l|l|l|l}
+    Legajo & EStart     & EEnd       & ECarrera \\ \hline
     1234   & 2013-03-01 & 2015-04-01 & 1        \\
     1234   & 2015-04-01 & 2015-05-01 & 2        \\
     1234   & 2015-05-01 & 2018-12-20 & 1
     \end{tabular}
-    \caption{La tabla \texttt{Estudiantes} luego del \texttt{UPDATE}}
+    \caption{la tabla \texttt{Estudiantes} luego del \texttt{UPDATE}.}
     \label{tab:update}
 \end{table}
 
@@ -256,6 +255,7 @@ Similarmente, un \texttt{DELETE} puede borrar un dato en un subperíodo de valid
 Esta nueva semántica de actualizaciones que y borrados nos introduce por otro lado un problema.
 En el ejemplo anterior, si la clave primaria de la tabla era el legajo, se produce una duplicación.
 Es evidente que tenemos que incluir el período en la PK.
+
 Comunmente querremos además evitar una forma particular de duplicación en los datos temporales:
 filas iguales en la parte no temporal de la clave primaria y con una superposicion de periodos.
 Para evitar este caso claramente no alcanza con prohibir la igualdad en todas las columnas como en un dato no temporal.
@@ -292,12 +292,17 @@ El uso de esta funcionalidad es opcional y se declara con la sintaxis WITH SYSTE
         EStart DATE,
         EEnd DATE,
         ECarrera INTEGER,
-        PERIOD FOR EPeriod (EStart, EEnd)
+        PERIOD FOR EPeriod (EStart, EEnd),
+        PRIMARY KEY (
+            Legajo,
+            EPeriod WITHOUT OVERLAPS
+        )
     )
     WITH SYSTEM VERSIONING;
 \end{verbatim}
 
-A las consultas por datos en un tiempo del sistema diferente se las conoce como \concept{consultas de viaje en el tiempo}.
+Como mencionamos en la sección anterior,
+a las consultas por datos en un tiempo del sistema diferente al presente se las conoce como \concept{consultas de viaje en el tiempo}.
 Los siguintes son algunos ejemplos de este tipo de consultas.
 
 \begin{verbatim}
@@ -329,7 +334,7 @@ mientras que \texttt{BETWEEN ... AND ...} es Cerrado-Cerrado.
 Por otro, se definen algunas constantes:
 una query sin especificar tiempo es equivalente a \texttt{FOR SYSTEM TIME AS OF CURRENT TIMESTAMP}.
 
-Cuando está activada, cualquier query \texttt{UPDATE} o DELETE automáticamente preserva el estado anterior en filas nuevas.
+Cuando está activada esta funcionalidad, cualquier query \texttt{UPDATE} o DELETE automáticamente preserva el estado anterior en filas nuevas.
 Podemos pensar que las filas son de dos tipos,
 de \concept{sistema actual} cuando el presente se encuentra dentro de su período de versionado de sistema
 e \concept{históricas} en otro caso.
