@@ -1,23 +1,83 @@
 \chapter{Bases de Datos Espaciotemporales}  \label{cap:et}
 
-\section{Introduccion}
-\label{sec:1}
-Comparacion de las dos culturas de investigacion que ya discutimos para introducir que hay varias tendencias en el campo.
+\section{Introduccion} \label{sec:st:intro}
 
-\section{El tiempo como una cuarta dimension}
-\label{sec:2}
-En esta seccion hablamos de lo intuitivo que es combinar ambos problemas pero a la vez las complicaciones que trae.
+En este capitulo aplicaremos un enfoque distintos a los capitulos anteriores.
+Para el estudio de las bases de espaciales y temporales fue necesario presentar varios conceptos teóricos,
+la mayoría provenientes de otras ramas cientificas,
+que contruyen los cimientos para la implementación de las mismas.
+Luego, presentamos los estandares ya afirmados en cada area,
+justificando con estos marcos teóricos las decisiones de diseño que se tomo en cada uno.
 
-\section{Conceptos}
-\label{sec:3}
-Use the template \emph{chapter.tex} together with the Springer document class SVMono (monograph-type books) or SVMult (edited books) to style the various elements of your chapter content in the Springer layout.
+En el campo de las \concept{bases de datos espaciotemporales},
+que es como llamaremos a las bases de datos que combinan de alguna forma ambas funcionalidades,
+veremos que el panorama es un poco distinto.
+Debido a la gran amplitud en requerimientos de las distintas aplicaciones,
+existen muchos y variados modelos, cada uno caracterizado por
+qué elementos toma de las funcionalidades espaciales, cuáles de las temporales y como los combina.
+La mayoría de estos modelos se focalizan en una o pocas aplicaciones.
+Si bien existen modelos mas generales, son muy complejos conceptualmente
+y no muy fáciles de optimizar para problemas específicos.
 
-\section{Queries espacio temporales}
-\label{sec:4}
-Mencionamos por arriba queries propias de espacio temporales que podrian ser interesantes. Algo estilo "ademas de las combinaciones obvias, hay algunas muy propias de espaciotemporales:"
+Por lo tanto, a lo largo de este capítulo iremos presentando brevemente, en orden incremental de complejidad,
+diferentes modelos y sus aplicaciones, intercalándolos con conceptos y definiciones cuando sea necesario.
+Para un estudio comparativo mas en profundidad de los distintos modelos, sugerimos recurrir a \cite{sp:litreview}.
 
-\section{Algunos modelos}
-\label{sec:5}
-Los mismos de las slides. La relfexion de que parte de diseñar una BDET es elegir el modelo que mas te sirva para el caso.
+\section{Modelo de Snapshots}
 
-% \input{referenc}
+% Propuesta
+Comenzaremos por el \concept{modelo de snapshots}\textsuperscript{\cite{sp:snapshot}}, por ser uno de los mas sencillos conceptualmente.
+Este modelo divide los datos en capas temporalmente homogeneas, con un timestamp único.
+De esta manera, muestra el estado de la distribución espacial en diferentes tiempos sin relaciones explícitas entre capas.
+
+% Ventajas
+Es un modelo que si bien representa aspectos espaciales y temporales,
+ambos se encuentran muy separados y no agrega comportamientos complejos.
+Desde el punto de vista espacial,
+podemos pensar el tiempo como un atributo no espacial (en el sentido definido en la sección \ref{subsec:mbo}).
+Desde el punto de vista temporal,
+a las consultas espaciales podemos agregarle condiciones de tiempo de validez similares a las que vimos en la sección \ref{subsec:pau}.
+
+% Desventajas
+Si bien como una primera aproximación es sencilla e intuitiva, la división en capas que propone este modelo tiene varias desventajas.
+\begin{itemize}
+    \item El modelo no es apropiado para describir cambios en el espacio a través del tiempo.
+        Es difícil determinar cambios entre dos momentos ya que hay que comparar los snapshots.
+    \item Todo cambio produce una copia completa en cada porción de tiempo,
+        generando una importante duplicación de datos.
+        Este problema se ve incrementado por la tendencia de los datos espaciales de por sí a ser muy pesados.
+    \item Es muy difícil diseñar o aplicar reglas para la lógica interna o la integridad.
+        El modelo no proporciona una comprensión de las restricciones en la estructura temporal.
+\end{itemize}
+
+
+\section{MADS}
+
+% Propuesta
+El modelo de snapshots y muchos otros modelos posteriores desarrollaron la idea de representar datos espaciales que pueden cambiar.
+Pero un enfoque diferente, propuesto por primera vez por \cite{CPS98},
+propone \textit{representar los procesos de cambio que actuan sobre los atributos geométricos de una entidad}.
+
+Un importante exponente de este modelo es \concept{MADS}\textsuperscript{\cite{PSZ99}}
+(sigla en inglés de "Modeling Application Data with Spatio-temporal features").
+MADS se propone incorporar los conceptos básicos de modelado de espacio y tiempo en el modelo objeto-relación.
+Los procesos son representados como relaciones entre objetos espacio-temporales.
+
+% TODO: mejorar
+
+\begin{verbatim}
+    OBJECT Parcel
+        TEMPORAL Day
+        GEOMETRY AREA TEMPORAL DAY
+        ATTRIBUTES
+            Number: INTEGER
+            Name: string [1:N] TEMPORAL DAY
+            Owner: [1:N] TEMPORAL DAY
+    END Parcel
+\end{verbatim}
+
+
+\section{MOST}
+
+% Objetos en Movimiento
+El último paradigma que veremos es el de los modelos que se centran en representar objetos en movimiento.

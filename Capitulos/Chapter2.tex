@@ -188,7 +188,7 @@ fácilmente sistemas previos al estándar.
 Además, como es común en el álgebra temporal, los periodos son \concept{cerrado-abierto},
 es decir que contienen el momento de su inicio pero no de su finalización.
 
-\subsection{Períodos de Aplicación de Usuario}
+\subsection{Períodos de Aplicación de Usuario} \label{subsec:pau}
 
 Veamos ahora un ejemplo de una tabla que define un periodo de aplicación de usuario:
 
@@ -250,7 +250,7 @@ la fila con \texttt{carrera = 2} se considera como la actualizada.
 Similarmente, un \texttt{DELETE} puede borrar un dato en un subperíodo de validez.
 %TODO quizas poner un ejemplo. Vemos si necesitamos ocupar mas espacio.
 
-\section{Claves Primarias}
+\subsection{Claves Primarias}
 
 Esta nueva semántica de actualizaciones que y borrados nos introduce por otro lado un problema.
 En el ejemplo anterior, si la clave primaria de la tabla era el legajo, se produce una duplicación.
@@ -279,7 +279,7 @@ Podemos volver a definir entonces nuestra tabla \texttt{Estudiantes} de la sigui
 
 %TODO: outro de tiempo de validez?
 
-\section{Tiempo de Versionado del Sistema}
+\subsection{Períodos de Versionado del Sistema} \label{subsec:pvs}
 
 Como mencionamos previamente, el otro tipo de períodos es de versionado de sistema.
 Las tablas declaradas con versionado de sistema tienen campos temporales de nombre fijo (\texttt{sys\_start} y \texttt{sys\_end}),
