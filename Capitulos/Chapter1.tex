@@ -1,3 +1,5 @@
+\newcommand{\concept}{\textbf}
+
 \chapter{Bases de Datos Espaciales}  \label{cap:e}
 
 \section{Introducción}
@@ -30,7 +32,7 @@ El desarrollo de modelos teóricos para las Bases de Datos Espaciales debe enten
 Los primeros GIS implementaban todas las operaciones sobre datos espaciales a nivel de aplicación,
 guardando sus datos en bases de datos convencionales.
 A su vez, los primeros SDBMS intentaron simplemente mover esta lógica al nivel de base de datos, pero sin desarrollar un marco teórico.
-Posteriormente, algunos investigadores comenzaron a dar definiciones formales de Tipos de Datos Espaciales (SDTs).
+Posteriormente, algunos investigadores comenzaron a dar definiciones formales de \concept{Tipos de Datos Espaciales} (SDTs).
 
 % Org de la seccion
 %TODO: rehacer esto al final
@@ -210,6 +212,8 @@ El estándar OGIS propone los siguientes tipos de datos:
 
 \subsection{Operaciones Espaciales}
 
+Centremonos ahora en las operaciones 
+
 % Taxonnomía
 En el modelo funcional, las relaciones disponibles quedaban definidas por las funciones de campos del modelo.
 Pero en un modelo basado en objetos, el espacio subyacente será el que determine las operaciones disponsibles
@@ -230,12 +234,14 @@ y las relaciones que pueden existir entre objetos. La siguiente tipología de es
     un sistema de referencia. Sobre espacios euclideanos pueden definirse todas las operaciones de las categorías anteriores.
 \end{itemize}
 
-%TODO: una tabla con operaciones espaciales
+%TODO: Ejemplos de tablas espaciales
+
+
 
 \section{Procesamiento de consultas espaciales}
 
 % Presentacion de filter-refine
-En esta sección exploraremos una técnica para la optimización de consultas espaciales sumamente imporante,
+En esta sección exploraremos una técnica para la optimización de consultas espaciales sumamente imporante:
 el paradigma de filtrado y refinamiento.
 
 % Consultas declarativas
