@@ -1,3 +1,4 @@
+\usepackage[utf8]{inputenc}
 \newcommand{\concept}{\textbf}
 
 \chapter{Bases de Datos Espaciales}  \label{cap:e}
@@ -212,8 +213,6 @@ El estándar OGIS propone los siguientes tipos de datos:
 
 \subsection{Operaciones Espaciales}
 
-Centremonos ahora en las operaciones 
-
 % Taxonnomía
 En el modelo funcional, las relaciones disponibles quedaban definidas por las funciones de campos del modelo.
 Pero en un modelo basado en objetos, el espacio subyacente será el que determine las operaciones disponsibles
@@ -235,8 +234,42 @@ y las relaciones que pueden existir entre objetos. La siguiente tipología de es
 \end{itemize}
 
 %TODO: Ejemplos de tablas espaciales
+Teniendo en cuenta esto, veamos ahora algunos ejemplos de las operaciones que define el estándar OGIS.
+Consideremos una base de datos espacial con las siguientes tablas que definen países, ciudades y ríos.
+
+\begin{verbatim}
+    CREATE TABLE Pais(
+        nombre varchar(30),
+        continente varcahr(30),
+        pbi integer,
+        geometria Polygon
+    );
+
+    CREATE TABLE Ciudad(
+        nombre varchar(30),
+        pais varchar(30),
+        poblacion integer,
+        geometria Point
+    );
+
+    CREATE TABLE Rio(
+        nombre varchar(30),
+        largo Number,
+        geometria LineString
+    );
+\end{verbatim}
+
+Podemos usar el predicado \texttt{Touch} para encontrar los países limítrofes de Argentina:
+
+\begin{verbatim}
+    SELECT P1.nombre AS "Limítrofes de Argentina"
+    FROM Pais P1, Pais P2
+    WHERE Touch(P1.geometria, P2.geometria) = 1
+          AND P2.nombre = 'Argentina';
+\end{verbatim}
 
 
+%TODO: una tabla de todas las operaciones espaciales, robada de algun lado.
 
 \section{Procesamiento de consultas espaciales}
 
