@@ -1,4 +1,3 @@
-\usepackage[utf8]{inputenc}
 \chapter{Bases de Datos Temporales}  \label{cap:t}
 
 \section{Introducción}
@@ -6,7 +5,7 @@
 % Intro
 Estudiaremos ahora el problema de representar \concept{datos temporales} y \concept{relaciones temporales} entre datos,
 ambos aspectos muy importantes de los fenómenos del mundo real.
-La habilidad de modelar esta dimension temporal es esencial para aplicaciones informaticas como
+La habilidad de modelar esta dimensión temporal es esencial para aplicaciones informáticas como
 econometría, bancos, control de inventario, contabilidad, leyes, registros médicos, sistemas de reservas de vuelos y muchas otras.
 
 % DBs tradicionales: unico estado presente
@@ -34,7 +33,7 @@ Para poder plantear una implementación de una base de datos temporal es necesar
 cómo se comporta y cómo se observa el tiempo.
 
 % Something something empieza teórico
-En el cápitulo anterior vimos como la investigación de bases de datos espaciales se vio motivada por
+En el capítulo anterior vimos como la investigación de bases de datos espaciales se vio motivada por
 la necesidad práctica de mejorar el manejo de datos de los sistemas GIS.
 Las bases de datos temporales por su parte, fueron fuertemente impactadas por
 la investigación previa en lógica temporal desde de los años 70\textsuperscript{\cite{temporal:status:directions}}
@@ -120,14 +119,14 @@ Existen varias razones para esta elección entre las que se destacan cuatro:
     \item Las medidas del tiempo son inherentemente imprecisas.
     Los instrumentos de medición temporal invariablemente reportan la ocurrencia de eventos en términos de chronons, no en “puntos” de tiempo.
     Por lo tanto, incluso los eventos así llamados “instantáneos” pueden ser medidos como si hubieran ocurrido durante un chronon, en el mejor de los casos.
-    \item La mayor parte de las referencias temporales del lenaguaje natural son compatibles con el modelo discreto del tiempo.
+    \item La mayor parte de las referencias temporales del lenguaje natural son compatibles con el modelo discreto del tiempo.
     Por ejemplo, cuando se dice que un evento ocurrió a las 4:30 PM,
     en realidad no se hace referencia a que el evento ocurrió en el “punto” del tiempo asociado a las 4:30 PM,
     sino a algún momento cercano a las 4:30 PM aunque exista una variación de uno o dos minutos.
     \item Los conceptos de chronon y de intervalo permiten modelar naturalmente eventos que no son instantáneos sino que tienen duración.
     \item Cualquier implementación de un modelo de datos con dimensión temporal tendrá la necesidad de codificar el tiempo de forma discreta,
     Es decir que, es inevitable discretizar el tiempo en algún punto.
-    Este problema es análogo al que analisamos en el Álgebra de Rose en el capítulo anterior.
+    Este problema es análogo al que analizamos en el Álgebra de Rose en el capítulo anterior.
 \end{itemize}
 
 \section{\textit{Tiempo de Validez} y \textit{Tiempo de Transacción}} \label{sec:val:trans}
@@ -138,7 +137,7 @@ pasaremos a la cuestión de integrar estos conceptos a un modelo de bases de dat
 Como veremos, es útil definir dos categorías fundamentales de datos temporales:
 \textbf{tiempo de validez} y \textbf{tiempo de transacción}.
 
-Volviendo sobre la intuición que planteamos en la introduccion de este capitulo, llamaremos \concept{bases de datos snapshot} a cualquier base de datos
+Volviendo sobre la intuición que planteamos en la introducción de este capitulo, llamaremos \concept{bases de datos snapshot} a cualquier base de datos
 que no soporta capacidades temporales (independientemente de si tiene datos temporales en un sentido definido por el usuario).
 Como se aprecia en la figura \ref{fig:state-machine}, podemos modelar estas bases de datos como maquinas de estado finitas, en la que cada
 estado contiene solo los datos del presente y un cambio destruye los datos anteriores.
@@ -153,7 +152,7 @@ estado contiene solo los datos del presente y un cambio destruye los datos anter
 Si nos interesa modelar los aspectos temporales propios del dominio del problema,
 podemos ampliar este modelo introduciendo el concepto de tiempo de validez,
 es decir el tiempo cuando el dato es verdadero en la realidad modelada.
-Un dato puede tener asociados multiples instantes e intervalos de tiempo de validez que representen diferentes atributos temporales del mismo.
+Un dato puede tener asociados múltiples instantes e intervalos de tiempo de validez que representen diferentes atributos temporales del mismo.
 A este tiempo también se lo suele conocer como tiempo del mundo real o tiempo lógico.
 
 Por otro lado, si nos interesa mantener un registro histórico de los estados que recorrió la base de datos,
@@ -342,5 +341,5 @@ Obviamente, no pueden realizarse queries \texttt{UPDATE} o \texttt{DELETE} sobre
 Las restricciones de integridad, por otro lado, son mas sencillas que en el caso de los períodos de aplicación de usuario:
 cualquier restriccion que es chequeada y se cumple en el sistema actual, heredará la propiedad cuando pase a ser una versión histórica.
 
-El estandar SQL 2011 soporta además bases de datos bitemporales en el sentido definido en al sección \ref{sec:val:trans},
+El estándar SQL 2011 soporta además bases de datos bitemporales en el sentido definido en al sección \ref{sec:val:trans},
 permitiendo combinar libremente estas funcionalidades con las de tiempo de aplicación de usuario vistas anteriormente.

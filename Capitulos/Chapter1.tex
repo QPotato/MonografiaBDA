@@ -1,4 +1,3 @@
-\usepackage[utf8]{inputenc}
 \newcommand{\concept}{\textbf}
 
 \chapter{Bases de Datos Espaciales}  \label{cap:e}
@@ -146,7 +145,7 @@ En este caso, se trata de una funcion escalonada (constante dentro en un mismo b
 En general, para modelar un problema usando el paradigma funcional, se deben definir tres componentes \cite{worboyz}:
 \begin{itemize}
     \item Un sistema de referencia espacial: una grilla finita sobre el espacio subyacente,
-    similar al concepto que presentamos en la sección \ref{realms:1} sobre el Algebra de RoSE.
+    similar al concepto que presentamos en la sección \ref{realms:1} sobre el Álgebra de RoSE.
     El ejemplo mas conocido es un sistema de referencia de la tierra por latitud y longitud.
     \item Campos simples: un conjunto finito de funciones computables $\{f_i: SF \rightarrow A_i, 1 \le i \le n\}$
     donde SF es el sistema de referencia espacial y los $A_i$ son dominios de atributos. La elecciones de estos dominios de atributos
@@ -155,7 +154,7 @@ En general, para modelar un problema usando el paradigma funcional, se deben def
     \begin{itemize}
         \item Operaciones locales: operaciones en las que el valor del campo resultante solo depende de los valores de los campos de entrada en ese punto.
         La composición de campos es un ejemplo de operación local.
-        \item Operacioes focales: operaciones en las que el valor del campo resultante depende de los valores de los campos en un pequeña vecindad alrededor del punto.
+        \item Operaciones focales: operaciones en las que el valor del campo resultante depende de los valores de los campos en un pequeña vecindad alrededor del punto.
         Este es el caso por ejemplo de operaciones que involucran gradientes.
         \item Operaciones zonales: operaciones que involucran operadores agregados como el promedio o la integración. También son operaciones
         zonales aquellas que particionan el espacio en zonas.
@@ -274,7 +273,7 @@ Podemos usar el predicado \texttt{Touch} para encontrar los países limítrofes 
 \section{Procesamiento de consultas espaciales}
 
 % Presentacion de filter-refine
-En esta sección exploraremos una técnica para la optimización de consultas espaciales sumamente imporante:
+En esta sección exploraremos una técnica para la optimización de consultas espaciales sumamente importante:
 el paradigma de filtrado y refinamiento.
 
 % Consultas declarativas
