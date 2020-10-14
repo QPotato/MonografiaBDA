@@ -258,7 +258,7 @@ Consideremos una base de datos espacial con las siguientes tablas que definen pa
     );
 \end{verbatim}
 
-Podemos usar el predicado \texttt{Touch} para encontrar los países limítrofes de Argentina:
+Podemos usar el predicado \texttt{Touch} para encontrar los países limítrofes de Argentina.
 
 \begin{verbatim}
     SELECT P1.nombre AS "Limítrofes de Argentina"
@@ -267,21 +267,38 @@ Podemos usar el predicado \texttt{Touch} para encontrar los países limítrofes 
           AND P2.nombre = 'Argentina';
 \end{verbatim}
 
+Podemos usar el predicado \texttt{Cross} para encontrar todos los paises por los cuales pasa cada río.
 
+\begin{verbatim}
+    SELECT R.nombre, P.nombre
+    FROM Rio R, Pais P
+    WHERE Cross(R.forma, P.forma) = 1
+\end{verbatim}
+
+Por último veamos una consulta mas compleja que combina dos operaciones nuevas. Supongamos que el Río Paraná puede proveer de agua a todas las ciudades a menos de 300km de distancia. Primero, podemos usar \texttt{Buffer} para encontrar el área a 300km de dicho río y luego, \texttt{Overlap} para encontrar aquellas ciudades que tienen intersección con esta área.
+
+\begin{verbatim}
+    SELECT C.nombre
+    FROM Ciudad C, Rio R
+    WHERE Rio.nombre = "Paraná"
+          AND Overlap(C.forma Buffer(R.forma, 300)) = 1
+\end{verbatim}
+
+Para un listado completo de los operadores y predicados espaciales presentes en el estandar SQL, sugerimos referirse a \cite{99opengis}.
 %TODO: una tabla de todas las operaciones espaciales, robada de algun lado.
 
-\section{Procesamiento de consultas espaciales}
+% \section{Procesamiento de consultas espaciales}
 
-% Presentacion de filter-refine
-En esta sección exploraremos una técnica para la optimización de consultas espaciales sumamente importante:
-el paradigma de filtrado y refinamiento.
+% % Presentacion de filter-refine
+% En esta sección exploraremos una técnica para la optimización de consultas espaciales sumamente importante:
+% el paradigma de filtrado y refinamiento.
 
-% Consultas declarativas
-Los usuarios expresan las consultas a un motor de bases de datos utilizando un lenguaje declarativo como SQL.
-Esto quiere decir que el usuario solo define qué resultado quiere, pero es responsabildiad del motor de bases de datos
-determinar cuál es el proceso más eficiente para llegar a ese resutado y luego ejecutarlo. A esto le llamamos procesamiento de consultas.
+% % Consultas declarativas
+% Los usuarios expresan las consultas a un motor de bases de datos utilizando un lenguaje declarativo como SQL.
+% Esto quiere decir que el usuario solo define qué resultado quiere, pero es responsabildiad del motor de bases de datos
+% determinar cuál es el proceso más eficiente para llegar a ese resutado y luego ejecutarlo. A esto le llamamos procesamiento de consultas.
 
-% Consultas single-scan vs multi-scan
-Las consultas a su vez, pueden dividirse en las de escaneo simple o escaneo múltiple.
-Es una consula de escaneo simple,cada registro de una tabla deberá ser accedido a lo sumo una vez durante el procesamiento de la consulta.
-La operación Join es el ejemplo típico de una operación de escaneo múltiple
+% % Consultas single-scan vs multi-scan
+% Las consultas a su vez, pueden dividirse en las de escaneo simple o escaneo múltiple.
+% Es una consula de escaneo simple,cada registro de una tabla deberá ser accedido a lo sumo una vez durante el procesamiento de la consulta.
+% La operación Join es el ejemplo típico de una operación de escaneo múltiple
