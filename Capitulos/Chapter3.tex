@@ -2,12 +2,10 @@
 
 \section{Introducción} \label{sec:st:intro}
 
-En este capitulo aplicaremos un enfoque distintos a los capitulos anteriores.
+En este capitulo aplicaremos un enfoque distinto a los capítulos anteriores.
 Para el estudio de las bases de espaciales y temporales fue necesario presentar varios conceptos teóricos,
-la mayoría provenientes de otras ramas científicas,
-que construyen los cimientos para la implementación de las mismas.
-Luego, presentamos los estándares ya afirmados en cada área,
-justificando con estos marcos teóricos las decisiones de diseño que se tomo en cada uno.
+la mayoría provenientes de otras ramas científicas, que construyen los cimientos para la implementación de las mismas.
+Luego, presentamos los estándares ya afirmados en cada área, justificando con estos marcos teóricos las decisiones de diseño que se tomo en cada uno.
 
 En el campo de las \concept{bases de datos espaciotemporales},
 que es como llamaremos a las bases de datos que combinan de alguna forma ambas funcionalidades,
@@ -16,11 +14,10 @@ Debido a la gran amplitud en requerimientos de las distintas aplicaciones,
 existen muchos y variados modelos, cada uno caracterizado por
 qué elementos toma de las funcionalidades espaciales, cuáles de las temporales y como los combina.
 La mayoría de estos modelos se focalizan en una o pocas aplicaciones.
-Si bien existen modelos mas generales, son muy complejos conceptualmente
+Si bien existen modelos mas generales, actualmente son muy complejos conceptualmente
 y no muy fáciles de optimizar para problemas específicos.
 
-Por lo tanto, a lo largo de este capítulo iremos presentando brevemente, en orden incremental de complejidad,
-diferentes modelos y sus aplicaciones, intercalándolos con conceptos y definiciones cuando sea necesario.
+Por lo tanto, a lo largo de este capítulo presentaremos brevemente algunos modelos y sus aplicaciones, intercalándolos con conceptos y definiciones cuando sea necesario.
 Para un estudio comparativo mas en profundidad de los distintos modelos, sugerimos recurrir a \cite{sp:litreview}.
 
 \section{Modelo de Snapshots}
@@ -53,31 +50,49 @@ Si bien como una primera aproximación es sencilla e intuitiva, la división en 
 
 \section{MADS}
 
-% % Propuesta
-% El modelo de snapshots y muchos otros modelos posteriores desarrollaron la idea de representar datos espaciales que pueden cambiar.
-% Pero un enfoque diferente, propuesto por primera vez por \cite{CPS98},
-% propone \textit{representar los procesos de cambio que actuan sobre los atributos geométricos de una entidad}.
+% Propuesta
+El modelo de snapshots y muchos otros modelos posteriores desarrollaron la idea de representar datos espaciales que pueden cambiar.
+Pero un enfoque diferente, propuesto por primera vez por Claramunt et al.\textsuperscript{\cite{CPS98}}, propone \textit{representar los procesos de cambio que actuan sobre los atributos geométricos de una entidad}.
 
-% Un importante exponente de este modelo es \concept{MADS}\textsuperscript{\cite{PSZ99}}
-% (sigla en inglés de "Modeling Application Data with Spatio-temporal features").
-% MADS se propone incorporar los conceptos básicos de modelado de espacio y tiempo en el modelo objeto-relación.
-% Los procesos son representados como relaciones entre objetos espaciotemporales.
+Un importante exponente de este modelo es \concept{MADS}\textsuperscript{\cite{PSZ99}}
+(sigla en inglés de "Modeling Application Data with Spatio-temporal features").
+MADS se propone incorporar los conceptos básicos de modelado de espacio y tiempo en el modelo objeto-relación.
+Los procesos son representados como relaciones entre objetos espaciotemporales. El siguiente es un ejemplo de representación de una parcela de tierra en MADS, tomado de \cite{sp:litreview}.
 
-% % TODO: mejorar
+\begin{verbatim}
+    OBJECT Parcel
+        TEMPORAL Day
+        GEOMETRY AREA TEMPORAL DAY
+        ATTRIBUTES
+            Number: INTEGER
+            Name: string [1:N] TEMPORAL DAY
+            Owner: [1:N] TEMPORAL DAY
+    END Parcel
+\end{verbatim}
 
-% \begin{verbatim}
-%     OBJECT Parcel
-%         TEMPORAL Day
-%         GEOMETRY AREA TEMPORAL DAY
-%         ATTRIBUTES
-%             Number: INTEGER
-%             Name: string [1:N] TEMPORAL DAY
-%             Owner: [1:N] TEMPORAL DAY
-%     END Parcel
-% \end{verbatim}
-
+% TODO: explicar los procesos en este ejemplo
 
 \section{MOST}
 
-% % Objetos en Movimiento
-% El último paradigma que veremos es el de los modelos que se centran en representar objetos en movimiento.
+% Objetos en Movimiento
+El último paradigma que veremos es el de los modelos que se centran en representar geometrías cambiando en el tiempo de forma continua. Esta línea fue propuesta primero por \cite{sp:moving} y luego expandida por \cite{sp:moving2}. Se basa en incorporar el tiempo como una dimension más junto a las espaciales, en muchos sentidos indistinguible de ellas.
+Introduce tipos de datos como punto en movimiento y región en movimiento (en las cuáles la expansión y contracción se considera parte del movimiento). Considera un modelo de tiempo de validez lineal, continuo/discreto y absoluto.
+
+El siguiente ejemplo presenta el mismo ejemplo de las parcelas de la sección anterior, en un modelo de objetos en movimiento como el propuesto en \cite{sp:moving2}.
+
+\begin{verbatim}
+    Parcel (name: string, owner: string, area: mregion)
+    Building (name: string, owner: string, area: mregion)
+    Lake (name: string, area: mregion)
+    River (name: string, route: mline)
+    Tree (name: string, centre: mpoint)
+\end{verbatim}
+
+Los tipos nuevos que introduce, como \texttt{mpoint}, \texttt{mline} y \texttt{mregion} son tridimensionales (dos dimensiones espaciales y una temporal). Este modelo pone un fuerte énfasis en tratar de ser general, cerrado y consistente. Sin embargo, publicaciones posteriores como \cite{sp:moving3} analizando la implementación de algoritmos sobre sus tipos de datos evidenciaron que presentan grandes dificultades. Este modelo nunca llegó a una implementación comercial completa.
+
+Un modelo de objetos en movimiento que sí fue implementado fue \concept{MOST (Moving Objects Spatio-Temporal data model)}\textsuperscript{\cite{sp:most}}. Este es un modelo de atributos dinámicos, es decir, atributos que cambian continuamente en función del tiempo sin ser actualizados explicitamente. Esto permite hacer predicciones sobre posiciones (y otras propiedades espaciales) futuras de los objetos en movimiento, guardando atributos derivados como la velocidad. Los autores incluso definen un lenguaje de consulta propio, Future Temporal Logic, pensado para realizar queries sobre los valores de los atributos espaciales en el futuro cercano.
+En este modelo, el resultado de una consulta no depende solo del contenido de la base de datos, sino también del momento en el que esta se realiza.
+
+MOST es ideal cuando las posiciones cambian en forma lineal o según otra función fácil de representar y de computar. Si el fenómeno estudiado modifica su movimiento, la función puede actualizarse a una que represente mejor la nueva trayectoria, pero esto puede representar una operación costosa si este cambio es muy frecuente.
+
+Como vemos, estos modelos son muy generales y pueden representar hasta las aplicaciones más complejas, pero son a su vez muy difíciles de implementar y muy complejos como para modelar aplicaciones más sencillas como casos en los que el tiempo se puede considerar discreto.
