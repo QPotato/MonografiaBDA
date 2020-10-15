@@ -183,7 +183,7 @@ En definitiva, la decisión de usar el paradigma funcional o de en objetos se ba
 
 \section{Tipos de Datos y Operaciones Espaciales} \label{sec:s:sdt}
 
-En esta seccion analizaremos los tipos de datos que introducen las bases de datos espaciales, enfocandonos en el paradigma basado en objetos. Veremos tabién algunos ejemplos de operaciones comunes con ellos.
+En esta sección analizaremos los tipos de datos que introducen las bases de datos espaciales, enfocándonos en el paradigma basado en objetos. Veremos también algunos ejemplos de operaciones comunes con ellos.
 
 \subsection{Tipos de Datos Espaciales}
 
@@ -193,9 +193,9 @@ El estándar OGIS propone los siguientes tipos de datos:
 \begin{itemize}
     \item Geometría: es un tipo abstracto (no puede ser instanciado) del cual se derivan todos los otros tipos.
     Tiene asociado un sistema de referencia.
-    \item Punto: describe la posicion de objetos de cero dimensiones,
+    \item Punto: describe la posición de objetos de cero dimensiones,
     como una oficina o una zona de campamento, en el caso del parque nacional.
-    \item Cadena de Lineas: describe un objeto de una dimension a través de una sucesión de de dos o mas puntos,
+    \item Cadena de Lineas: describe un objeto de una dimensión a través de una sucesión de de dos o mas puntos,
     que pueden representar un segmento o aproximar una curva. Por ejemplo, caminos o ríos.
     \item Polígono: objetos de 2 dimensiones, como un bosque.
     \item Colección de Geometrías: formas complejas formadas por conjuntos de otros tipos.
@@ -222,8 +222,8 @@ y las relaciones que pueden existir entre objetos. La siguiente tipología de es
     o basadas en un observador (un objeto especial designado como tal).
     \item Espacios Métricos: son aquellos espacios en los que la noción de distancia está bien definida. La función de distancia puede usarse
     para definir una topología y por lo tanto todo espacio métrico es también un espacio topológico.
-    \item Espacios Euclideanos: Son espacios en los que los puntos pueden expresarse como la combinación lineal de los elementos de
-    un sistema de referencia. Sobre espacios euclideanos pueden definirse todas las operaciones de las categorías anteriores.
+    \item Espacios Euclidianos: Son espacios en los que los puntos pueden expresarse como la combinación lineal de los elementos de
+    un sistema de referencia. Sobre espacios euclidianos pueden definirse todas las operaciones de las categorías anteriores.
 \end{itemize}
 
 %TODO: Ejemplos de tablas espaciales
@@ -278,7 +278,7 @@ Por último veamos una consulta mas compleja que combina dos operaciones nuevas.
           AND Overlap(C.forma Buffer(R.forma, 300)) = 1
 \end{verbatim}
 
-Para un listado completo de los operadores y predicados espaciales incorporados al estandar SQL, sugerimos referirse a \cite{99opengis}.
+Para un listado completo de los operadores y predicados espaciales incorporados al estándar SQL, sugerimos referirse a \cite{99opengis}.
 %TODO: una tabla de todas las operaciones espaciales, robada de algun lado.
 
 % \section{Procesamiento de consultas espaciales}

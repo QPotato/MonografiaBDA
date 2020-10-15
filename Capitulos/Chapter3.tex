@@ -52,7 +52,7 @@ Si bien como una primera aproximación es sencilla e intuitiva, la división en 
 
 % Propuesta
 El modelo de snapshots y muchos otros modelos posteriores desarrollaron la idea de representar datos espaciales que pueden cambiar.
-Pero un enfoque diferente, propuesto por primera vez por Claramunt et al.\textsuperscript{\cite{CPS98}}, propone \textit{representar los procesos de cambio que actuan sobre los atributos geométricos de una entidad}.
+Pero un enfoque diferente, propuesto por primera vez por Claramunt et al.\textsuperscript{\cite{CPS98}}, propone \textit{representar los procesos de cambio que actúan sobre los atributos geométricos de una entidad}.
 
 Un importante exponente de este modelo es \concept{MADS}\textsuperscript{\cite{PSZ99}}
 (sigla en inglés de "Modeling Application Data with Spatio-temporal features").
@@ -75,7 +75,7 @@ Los procesos son representados como relaciones entre objetos espaciotemporales. 
 \section{MOST}
 
 % Objetos en Movimiento
-El último paradigma que veremos es el de los modelos que se centran en representar geometrías cambiando en el tiempo de forma continua. Esta línea fue propuesta primero por \cite{sp:moving} y luego expandida por \cite{sp:moving2}. Se basa en incorporar el tiempo como una dimension más junto a las espaciales, en muchos sentidos indistinguible de ellas.
+El último paradigma que veremos es el de los modelos que se centran en representar geometrías cambiando en el tiempo de forma continua. Esta línea fue propuesta primero por \cite{sp:moving} y luego expandida por \cite{sp:moving2}. Se basa en incorporar el tiempo como una dimensión más junto a las espaciales, en muchos sentidos indistinguible de ellas.
 Introduce tipos de datos como punto en movimiento y región en movimiento (en las cuáles la expansión y contracción se considera parte del movimiento). Considera un modelo de tiempo de validez lineal, continuo/discreto y absoluto.
 
 El siguiente ejemplo presenta el mismo ejemplo de las parcelas de la sección anterior, en un modelo de objetos en movimiento como el propuesto en \cite{sp:moving2}.
@@ -90,7 +90,7 @@ El siguiente ejemplo presenta el mismo ejemplo de las parcelas de la sección an
 
 Los tipos nuevos que introduce, como \texttt{mpoint}, \texttt{mline} y \texttt{mregion} son tridimensionales (dos dimensiones espaciales y una temporal). Este modelo pone un fuerte énfasis en tratar de ser general, cerrado y consistente. Sin embargo, publicaciones posteriores como \cite{sp:moving3} analizando la implementación de algoritmos sobre sus tipos de datos evidenciaron que presentan grandes dificultades. Este modelo nunca llegó a una implementación comercial completa.
 
-Un modelo de objetos en movimiento que sí fue implementado fue \concept{MOST (Moving Objects Spatio-Temporal data model)}\textsuperscript{\cite{sp:most}}. Este es un modelo de atributos dinámicos, es decir, atributos que cambian continuamente en función del tiempo sin ser actualizados explicitamente. Esto permite hacer predicciones sobre posiciones (y otras propiedades espaciales) futuras de los objetos en movimiento, guardando atributos derivados como la velocidad. Los autores incluso definen un lenguaje de consulta propio, Future Temporal Logic, pensado para realizar queries sobre los valores de los atributos espaciales en el futuro cercano.
+Un modelo de objetos en movimiento que sí fue implementado fue \concept{MOST (Moving Objects Spatio-Temporal data model)}\textsuperscript{\cite{sp:most}}. Este es un modelo de atributos dinámicos, es decir, atributos que cambian continuamente en función del tiempo sin ser actualizados explícitamente. Esto permite hacer predicciones sobre posiciones (y otras propiedades espaciales) futuras de los objetos en movimiento, guardando atributos derivados como la velocidad. Los autores incluso definen un lenguaje de consulta propio, Future Temporal Logic, pensado para realizar queries sobre los valores de los atributos espaciales en el futuro cercano.
 En este modelo, el resultado de una consulta no depende solo del contenido de la base de datos, sino también del momento en el que esta se realiza.
 
 MOST es ideal cuando las posiciones cambian en forma lineal o según otra función fácil de representar y de computar. Si el fenómeno estudiado modifica su movimiento, la función puede actualizarse a una que represente mejor la nueva trayectoria, pero esto puede representar una operación costosa si este cambio es muy frecuente.
