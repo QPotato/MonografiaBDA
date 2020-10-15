@@ -4,46 +4,38 @@
 
 \section{Introducción}
 
-% Datos Espaciales
-%TODO
-
 % Que es una base de datos espacial
-%TODO: mejorar
-Los sistemas de bases de datos espaciales (SDBMS) son los DBMS que incorporan capacidades de representación y manipulación de
-datos geométricos en un marco de referencia dado.
+Comenzaremos este trabajo con el estudio de los datos espaciales. Llamamos \concept{bases de datos espaciales} a aquellas que incorporan capacidades de representación y manipulación de datos geométricos relativos a un sistema de referencia. Llamaremos también \concept{SDBMS} (Spatial Database Managent System) a los motores de bases de datos que incorporan estas funcionalidades.
 
 % GIS
-La principal aplicación de los SDBMS son los Sistemas de Información Geográfica (GIS): software que provee mecanismos de análisis
-y visualización de de datos geográficos. Los datos geográficos son datos espaciales cuyo marco de referencia  es la superficie terrestre.
-Los GIS implementan en sus herramientas un gran conjunto de técnicas desarrolladas por cartógrafos y que son previas al desarrollo de la informática.
-Este hecho dota a la investigación de las Bases de Datos Espaciales de un \emph{carácter multidisciplinario} que puede señalarse como
-una de las causas del rápido avance de la misma.
+Su origen y principal aplicación son los Sistemas de Información Geográfica (GIS): software que provee mecanismos de análisis y visualización de de datos geográficos, es decir, datos espaciales cuyo sistema de referencia  es la superficie terrestre.
+
+Los GIS implementan en sus herramientas un gran conjunto de técnicas desarrolladas por cartógrafos a lo largo de la historia y que son previas al desarrollo de las tecnologías informáticas. Este hecho dota a la investigación de las bases de datos espaciales de un carácter multidisciplinario que puede señalarse como una de las causas del rápido avance de la misma.
 
 % Otras aplicaciones
-A su vez, existen otras aplicaciones para los SDBMS tales como la representación de circuitos, datos astronómicos, moléculas y muchas otras.
-En general, los modelos teóricos son los mismos y lo que cambia es simplemente el marco de referencia en el que se representan los datos.
-En este trabajo haremos foco en las aplicaciones a los GIS, pero el lector no debe perder de vista que todos los conceptos discutidos
-son aplicables a estas otras áreas.
+A su vez, existen otras aplicaciones para las bases de datos espaciales tales como la representación de circuitos, datos astronómicos, moléculas y muchas otras.
+En general, los modelos teóricos para estas aplicaciones son los mismos, siendo la única diferencia simplemente el sistema de referencia en el que se representan los datos.
+En este trabajo haremos foco en las aplicaciones a los GIS, pero el lector no debe perder de vista que todos los conceptos discutidos son aplicables a estas otras áreas.
 
-\section{Modelos Teóricos}
+% Org del capitulo
+En la seccion \ref{sec:s:models} estudiaremos los distintos modelos teóricos existentes en el campo de las bases de datos espaciales . Luego, en la seccion \ref{sec:s:sdt} nos enfocaremos en un paradigma particular para ver mas en detalle los tipos de datos que incorpora y algunas de sus operaciones.
+
+\section{Modelos Teóricos} \label{sec:s:models}
 
 % Contexto
-El desarrollo de modelos teóricos para las Bases de Datos Espaciales debe entenderse en el contexto histórico discutido en la sección anterior.
-Los primeros GIS implementaban todas las operaciones sobre datos espaciales a nivel de aplicación,
-guardando sus datos en bases de datos convencionales.
-A su vez, los primeros SDBMS intentaron simplemente mover esta lógica al nivel de base de datos, pero sin desarrollar un marco teórico.
-Posteriormente, algunos investigadores comenzaron a dar definiciones formales de \concept{Tipos de Datos Espaciales} (SDTs).
+El desarrollo de modelos teóricos para las bases de datos espaciales debe entenderse en el contexto histórico discutido en la sección anterior.
+Los primeros GIS implementaban todas las operaciones sobre datos espaciales a nivel de aplicación, guardando sus datos en bases de datos convencionales.
+A su vez, los primeros motores de bases de datos espaciales intentaron simplemente mover esta lógica al nivel de base de datos, pero sin desarrollar un marco teórico.
+Posteriormente, algunos investigadores comenzaron a dar definiciones formales de \concept{tipos de datos espaciales}.
 
 % Org de la seccion
 %TODO: rehacer esto al final
-En las secciones \ref{realms:1} y \ref{realms:2} analizaremos brevemente el Álgebra de RoSE \cite{rose} (Robust Spatial Extension),
-un modelo formal que consideramos uno de los más elegantes y significativos del campo.
-Luego, en las secciones 2.2.3 y 2.2.4 veremos los principales paradigmas de modelado que se utilizan en los SDBMS actuales,
-el modelo funcional y el modelo basado en objetos.
+Comenzaremos analizando en las secciones \ref{realms:1} y \ref{realms:2} el Álgebra de RoSE\textsuperscript{\cite{rose}} (Robust Spatial Extension), un modelo formal que consideramos uno de los más elegantes y significativos del campo.
+Luego, en las secciones \ref{sec:s:fun} y \ref{s:obj} veremos los principales paradigmas de modelado que se utilizan en los sistemas de bases de bases de datos espaciales actuales, los modelos funcionales y los orientados a objetos.
 
 \subsection{Realms} \label{realms:1}
 
-Según Güting y Schneider \cite{rose}, un modelo formal para Bases de Datos Espaciales debe ser:
+Según Güting y Schneider\textsuperscript{\cite{rose}}, un modelo formal para Bases de Datos Espaciales debe ser:
 \begin{itemize}
     \item General: los objetos geométricos usados como valores de SDTs deben ser tan generales como sea posible.
         Por ejemplo, un valor región debe poder representar una colección de áreas disjuntas, cada una de las cuales puede tener agujeros.
@@ -72,7 +64,7 @@ No se computan intersecciones durante consultas de búsqueda.
 
 % Finite resolution
 Para mapear los segmentos con intersecciones de una aplicación a un conjunto de segmentos sin intersecciones de un realm,
-se utiliza redibujado y geometría de resolución finita \cite{finite:resolution}.
+se utiliza redibujado y geometría de resolución finita\textsuperscript{\cite{finite:resolution}}.
 
 \subsection{Actualizaciones en realms} \label{realms:2}
 
@@ -128,7 +120,7 @@ Si bien el Álgebra de RoSE fue un hito en términos de rigurosidad teórica en 
 no es utilizada actualmente en ninguno de los SDBMSs actualmente en uso por la industria del software.
 De todas formas, su influencia puede verse en los modelos que se utilizan actualmente y que veremos a continuación.
 
-\subsection{Modelo Funcional}
+\subsection{Modelo Funcional} \label{sec:s:fun}
 
 % Intro y ejemplo
 En esta sección, veremos el modelo funcional o modelo orientado a campos.
@@ -142,7 +134,7 @@ En este caso, se trata de una funcion escalonada (constante dentro en un mismo b
 
 
 % Componentes de un modelo funcional
-En general, para modelar un problema usando el paradigma funcional, se deben definir tres componentes \cite{worboyz}:
+En general, para modelar un problema usando el paradigma funcional, se deben definir tres componentes\textsuperscript{\cite{worboyz}}:
 \begin{itemize}
     \item Un sistema de referencia espacial: una grilla finita sobre el espacio subyacente,
     similar al concepto que presentamos en la sección \ref{realms:1} sobre el Álgebra de RoSE.
@@ -166,7 +158,7 @@ Los modelos funcionales son buenos para representar problemas en los que las dat
 como elevación, temperatura y variación del suelo.
 Tienen la ventaja de poder representar fenómenos espaciales amorfos o con contornos fluidos.
 
-\subsection{Modelos Basados en Objetos} \label{subsec:mbo}
+\subsection{Modelos Basados en Objetos} \label{sec:s:obj}
 
 %TODO: \cite{oo:spatial}
 % Ejemplo en objetos
@@ -189,12 +181,14 @@ Los modelos de objetos son los mas comunes en problemas relacionados a represent
 Tienen la ventaja de ser mas intuitivos y cercanos a los modelos Entidad-Relación ya muy presentes en los DBMS más usados.
 En definitiva, la decisión de usar el paradigma funcional o de en objetos se basará en los requerimientos de la aplicación.
 
-En las próximas secciones, detallaremos más los SDTs y operaciones espaciales en el modelo basado en objetos.
+\section{Tipos de Datos y Operaciones Espaciales} \label{sec:s:sdt}
 
-\subsection{SDTs}
+En esta seccion analizaremos los tipos de datos que introducen las bases de datos espaciales, enfocandonos en el paradigma basado en objetos. Veremos tabién algunos ejemplos de operaciones comunes con ellos.
 
-Se han propuesto muchos conjuntos básicos de tipos espaciales para la representación de formas comunes en mapas.
-Actualmente, la más adoptada es el estándar OGIS \cite{99opengis} y es en la que nos basaremos.
+\subsection{Tipos de Datos Espaciales}
+
+Se han propuesto muchos conjuntos básicos de tipos espaciales para la representación de formas comunes en mapas. Actualmente, la más adoptada es el estándar OGIS\textsuperscript{\cite{99opengis}} y es en la que nos basaremos.
+
 El estándar OGIS propone los siguientes tipos de datos:
 \begin{itemize}
     \item Geometría: es un tipo abstracto (no puede ser instanciado) del cual se derivan todos los otros tipos.
@@ -284,7 +278,7 @@ Por último veamos una consulta mas compleja que combina dos operaciones nuevas.
           AND Overlap(C.forma Buffer(R.forma, 300)) = 1
 \end{verbatim}
 
-Para un listado completo de los operadores y predicados espaciales presentes en el estandar SQL, sugerimos referirse a \cite{99opengis}.
+Para un listado completo de los operadores y predicados espaciales incorporados al estandar SQL, sugerimos referirse a \cite{99opengis}.
 %TODO: una tabla de todas las operaciones espaciales, robada de algun lado.
 
 % \section{Procesamiento de consultas espaciales}

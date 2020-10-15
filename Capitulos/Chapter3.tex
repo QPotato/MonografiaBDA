@@ -1,4 +1,4 @@
-\chapter{Bases de Datos Espacio-temporales}  \label{cap:et}
+\chapter{Bases de Datos Espaciotemporales}  \label{cap:et}
 
 \section{Introducción} \label{sec:st:intro}
 
@@ -9,7 +9,7 @@ que construyen los cimientos para la implementación de las mismas.
 Luego, presentamos los estándares ya afirmados en cada área,
 justificando con estos marcos teóricos las decisiones de diseño que se tomo en cada uno.
 
-En el campo de las \concept{bases de datos espacio-temporales},
+En el campo de las \concept{bases de datos espaciotemporales},
 que es como llamaremos a las bases de datos que combinan de alguna forma ambas funcionalidades,
 veremos que el panorama es un poco distinto.
 Debido a la gran amplitud en requerimientos de las distintas aplicaciones,
@@ -53,31 +53,31 @@ Si bien como una primera aproximación es sencilla e intuitiva, la división en 
 
 \section{MADS}
 
-% Propuesta
-El modelo de snapshots y muchos otros modelos posteriores desarrollaron la idea de representar datos espaciales que pueden cambiar.
-Pero un enfoque diferente, propuesto por primera vez por \cite{CPS98},
-propone \textit{representar los procesos de cambio que actuan sobre los atributos geométricos de una entidad}.
+% % Propuesta
+% El modelo de snapshots y muchos otros modelos posteriores desarrollaron la idea de representar datos espaciales que pueden cambiar.
+% Pero un enfoque diferente, propuesto por primera vez por \cite{CPS98},
+% propone \textit{representar los procesos de cambio que actuan sobre los atributos geométricos de una entidad}.
 
-Un importante exponente de este modelo es \concept{MADS}\textsuperscript{\cite{PSZ99}}
-(sigla en inglés de "Modeling Application Data with Spatio-temporal features").
-MADS se propone incorporar los conceptos básicos de modelado de espacio y tiempo en el modelo objeto-relación.
-Los procesos son representados como relaciones entre objetos espacio-temporales.
+% Un importante exponente de este modelo es \concept{MADS}\textsuperscript{\cite{PSZ99}}
+% (sigla en inglés de "Modeling Application Data with Spatio-temporal features").
+% MADS se propone incorporar los conceptos básicos de modelado de espacio y tiempo en el modelo objeto-relación.
+% Los procesos son representados como relaciones entre objetos espaciotemporales.
 
-% TODO: mejorar
+% % TODO: mejorar
 
-\begin{verbatim}
-    OBJECT Parcel
-        TEMPORAL Day
-        GEOMETRY AREA TEMPORAL DAY
-        ATTRIBUTES
-            Number: INTEGER
-            Name: string [1:N] TEMPORAL DAY
-            Owner: [1:N] TEMPORAL DAY
-    END Parcel
-\end{verbatim}
+% \begin{verbatim}
+%     OBJECT Parcel
+%         TEMPORAL Day
+%         GEOMETRY AREA TEMPORAL DAY
+%         ATTRIBUTES
+%             Number: INTEGER
+%             Name: string [1:N] TEMPORAL DAY
+%             Owner: [1:N] TEMPORAL DAY
+%     END Parcel
+% \end{verbatim}
 
 
 \section{MOST}
 
-% Objetos en Movimiento
-El último paradigma que veremos es el de los modelos que se centran en representar objetos en movimiento.
+% % Objetos en Movimiento
+% El último paradigma que veremos es el de los modelos que se centran en representar objetos en movimiento.
