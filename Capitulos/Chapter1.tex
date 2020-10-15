@@ -35,7 +35,7 @@ Luego, en las secciones \ref{sec:s:fun} y \ref{s:obj} veremos los principales pa
 
 \subsection{Realms} \label{realms:1}
 
-Según Güting y Schneider\textsuperscript{\cite{rose}}, un modelo formal para Bases de Datos Espaciales debe ser:
+Según Güting y Schenider\textsuperscript{\cite{rose}}, un modelo formal para Bases de Datos Espaciales debe ser:
 \begin{itemize}
     \item General: los objetos geométricos usados como valores de SDTs deben ser tan generales como sea posible.
         Por ejemplo, un valor región debe poder representar una colección de áreas disjuntas, cada una de las cuales puede tener agujeros.
@@ -269,7 +269,7 @@ Podemos usar el predicado \texttt{Cross} para encontrar todos los paises por los
     WHERE Cross(R.forma, P.forma) = 1
 \end{verbatim}
 
-Por último veamos una consulta mas compleja que combina dos operaciones nuevas. Supongamos que el Río Paraná puede proveer de agua a todas las ciudades a menos de 300km de distancia. Primero, podemos usar \texttt{Buffer} para encontrar el área a 300km de dicho río y luego, \texttt{Overlap} para encontrar aquellas ciudades que tienen intersección con esta área.
+Por último veamos una consulta mas compleja que combina dos operaciones nuevas. Supongamos que el Río Paraná puede proveer de agua a todas las ciudades a menos de 300km de distancia. Primero, podemos usar \texttt{Buffer} para encontrar el área a 300km de dicho río (esto es una generalización de las envolturas que vimos en la sección \ref{realms:2}) y luego, \texttt{Overlap} para encontrar aquellas ciudades que tienen intersección con esta área.
 
 \begin{verbatim}
     SELECT C.nombre
