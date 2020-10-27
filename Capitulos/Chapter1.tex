@@ -8,7 +8,7 @@
 Comenzaremos este trabajo con el estudio de los datos espaciales. Llamamos \concept{bases de datos espaciales} a aquellas que incorporan capacidades de representación y manipulación de datos geométricos relativos a un sistema de referencia. Llamaremos también \concept{SDBMS} (Spatial Database Managent System) a los motores de bases de datos que incorporan estas funcionalidades.
 
 % GIS
-Su origen y principal aplicación son los Sistemas de Información Geográfica (GIS): software que provee mecanismos de análisis y visualización de de datos geográficos, es decir, datos espaciales cuyo sistema de referencia  es la superficie terrestre.
+Su origen y principal aplicación son los Sistemas de Información Geográfica (GIS): software que provee mecanismos de análisis y visualización de datos geográficos, es decir, datos espaciales cuyo sistema de referencia  es la superficie terrestre.
 
 Los GIS implementan en sus herramientas un gran conjunto de técnicas desarrolladas por cartógrafos a lo largo de la historia y que son previas al desarrollo de las tecnologías informáticas. Este hecho dota a la investigación de las bases de datos espaciales de un carácter multidisciplinario que puede señalarse como una de las causas del rápido avance de la misma.
 
@@ -18,7 +18,7 @@ En general, los modelos teóricos para estas aplicaciones son los mismos, siendo
 En este trabajo haremos foco en las aplicaciones a los GIS, pero el lector no debe perder de vista que todos los conceptos discutidos son aplicables a estas otras áreas.
 
 % Org del capitulo
-En la seccion \ref{sec:s:models} estudiaremos los distintos modelos teóricos existentes en el campo de las bases de datos espaciales . Luego, en la seccion \ref{sec:s:sdt} nos enfocaremos en un paradigma particular para ver mas en detalle los tipos de datos que incorpora y algunas de sus operaciones.
+En la seccion \ref{sec:s:models} estudiaremos los distintos modelos teóricos existentes en el campo de las bases de datos espaciales . Luego, en la seccion \ref{sec:s:sdt} nos enfocaremos en un paradigma particular para ver más en detalle los tipos de datos que incorpora y algunas de sus operaciones.
 
 \section{Modelos Teóricos} \label{sec:s:models}
 
@@ -31,7 +31,7 @@ Posteriormente, algunos investigadores comenzaron a dar definiciones formales de
 % Org de la seccion
 %TODO: rehacer esto al final
 Comenzaremos analizando en las secciones \ref{realms:1} y \ref{realms:2} el Álgebra de RoSE\textsuperscript{\cite{rose}} (Robust Spatial Extension), un modelo formal que consideramos uno de los más elegantes y significativos del campo.
-Luego, en las secciones \ref{sec:s:fun} y \ref{s:obj} veremos los principales paradigmas de modelado que se utilizan en los sistemas de bases de bases de datos espaciales actuales, los modelos funcionales y los orientados a objetos.
+Luego, en las secciones \ref{sec:s:fun} y \ref{sec:s:obj} veremos los principales paradigmas de modelado que se utilizan en los sistemas de bases de bases de datos espaciales actuales, los modelos funcionales y los orientados a objetos.
 
 \subsection{Realms} \label{realms:1}
 
@@ -39,13 +39,13 @@ Según Güting y Schenider\textsuperscript{\cite{rose}}, un modelo formal para B
 \begin{itemize}
     \item General: los objetos geométricos usados como valores de SDTs deben ser tan generales como sea posible.
         Por ejemplo, un valor región debe poder representar una colección de áreas disjuntas, cada una de las cuales puede tener agujeros.
-        Mas precisamente, los dominios de los tipos de datos punto, línea y región deben ser cerrados respecto a la unión,
+        Más precisamente, los dominios de los tipos de datos punto, línea y región deben ser cerrados respecto a la unión,
         intersección y diferencia de sus conjuntos de puntos subyacentes.
     \item Riguroso: la semántica de los SDTs, es decir, los posibles valores para los tipos y las funciones asociadas con las operaciones,
         deben estar definidas formalmente para evitar ambigüedades para el usuario y el implementador.
     \item De resolución finita: las definiciones formales deben tener en cuenta las capacidades de representación finitas de las computadoras
         Delegarle al programador la responsabilidad de cerrar la brecha entre teoría y práctica en este punto lleva a errores numéricos y topológicos.
-    \item Geométricamente consistente: distintos objetos espaciales pueden estar pueden estar relacionados mediante restricciones geométricas.
+    \item Geométricamente consistente: distintos objetos espaciales pueden estar relacionados mediante restricciones geométricas.
         Las definiciones de los SDTs ayudar a mantener esa consistencia.
 \end{itemize}
 
@@ -59,7 +59,7 @@ Es decir, que la primitivas geométricas y las operaciones sobre realms se defin
 aritmética entera, libre de errores de redondeo que podrían aparecer si el modelo se definiera sobre un espacio euclídeo.
 
 % Computo complejo en los inserts y updates, no en busquedas.
-Otra ventaja de los realms es que permiten aislar todo el computo de puntos en las operaciones de actualización del realm.
+Otra ventaja de los realms es que permiten aislar todo el cómputo de puntos en las operaciones de actualización del realm.
 No se computan intersecciones durante consultas de búsqueda.
 
 % Finite resolution
@@ -69,16 +69,16 @@ se utiliza redibujado y geometría de resolución finita\textsuperscript{\cite{f
 \subsection{Actualizaciones en realms} \label{realms:2}
 
 % Redibujado
-Veamos mas en detalle que ocurre en este modelo cuando se realiza una actualización que requiere la insercion de un nuevo segmento.
+Veamos más en detalle qué ocurre en este modelo cuando se realiza una actualización que requiere la inserción de un nuevo segmento.
 Esto es importante porque los datos geométricos provenientes de la aplicación no son no-intersecantes como requiere el modelo.
 El problema fundamental es que usualmente los puntos de intersección no se corresponden con puntos de la grilla del realm.
 La solución es aplicar redibujado:
-se modifican los segmentos de forma tal que la intersección se mueva al punto mas cercano que sí esté en la grilla.
+se modifican los segmentos de forma tal que la intersección se mueva al punto más cercano que sí esté en la grilla.
 
 % Ejemplo de redibujado
 Esto puede verse en las figuras \ref{fig:realms:redibu:a} y \ref{fig:realms:redibu:b}:
 la intersección entre los segmentos A y B (D') no se corresponde con un punto de la grilla,
-pero podemos partir a cada uno de ellos en dos, de manera que todos los segmentos resultantes tengan a Dcomo uno de sus extremos.
+pero podemos partir a cada uno de ellos en dos, de manera que todos los segmentos resultantes tengan a D como uno de sus extremos.
 
 \begin{figure}
     \centering
@@ -98,10 +98,10 @@ pero podemos partir a cada uno de ellos en dos, de manera que todos los segmento
 
 % Envolturas
 Pero ahora nos surge un nuevo problema que es la preocupación de que aplicando esta operación sucesivamente
-los segmentos se modifiquen cada vez mas, introduciendo cada vez mas error en la representacion.
+los segmentos se modifiquen cada vez más, introduciendo cada vez más error en la representación.
 Podemos acotar este error que se introduce, usando el concepto de envoltura.
 La envoltura de un segmento es el conjunto de puntos de la grilla que se encuentran inmediatamente arriba, debajo o sobre el segmento.
-Si establecemos entonces la restriccion de que los puntos a usar para el redibujado deben caer sobre la envoltura del segmento,
+Si establecemos entonces la restricción de que los puntos a usar para el redibujado deben caer sobre la envoltura del segmento,
 tenemos una cota para el error: la distancia entre puntos en la grilla.
 La figura \ref{fig:realms:envoltura} muestra un ejemplo de envoltura de un segmento.
 
@@ -130,7 +130,7 @@ un conjunto de bosques, cada uno con una especie de árbol dominante.
 % Ejemplo en funcional
 En el modelo funcional, se pueden modelar los bosques del parque nacional como
 una función cuyo dominio es el conjunto de puntos en el mapa del parque nacional y el rango es un conjunto de especies de árboles.
-En este caso, se trata de una funcion escalonada (constante dentro en un mismo bosque y con saltos en los bordes entre bosques).
+En este caso, se trata de una función escalonada (constante dentro de un mismo bosque y con saltos en los bordes entre bosques).
 
 
 % Componentes de un modelo funcional
@@ -138,7 +138,7 @@ En general, para modelar un problema usando el paradigma funcional, se deben def
 \begin{itemize}
     \item Un sistema de referencia espacial: una grilla finita sobre el espacio subyacente,
     similar al concepto que presentamos en la sección \ref{realms:1} sobre el Álgebra de RoSE.
-    El ejemplo mas conocido es un sistema de referencia de la tierra por latitud y longitud.
+    El ejemplo más conocido es un sistema de referencia de la tierra por latitud y longitud.
     \item Campos simples: un conjunto finito de funciones computables $\{f_i: SF \rightarrow A_i, 1 \le i \le n\}$
     donde SF es el sistema de referencia espacial y los $A_i$ son dominios de atributos. La elecciones de estos dominios de atributos
     y las funciones que asignan elementos de los mismos a cada punto del espacio dependerá de la aplicación en cuestión.
@@ -154,9 +154,7 @@ En general, para modelar un problema usando el paradigma funcional, se deben def
 \end{itemize}
 
 % Ventajas de funcional
-Los modelos funcionales son buenos para representar problemas en los que las datos continuos
-como elevación, temperatura y variación del suelo.
-Tienen la ventaja de poder representar fenómenos espaciales amorfos o con contornos fluidos.
+Los modelos funcionales son buenos para representar problemas en los que los datos son continuos (como elevación, temperatura y variación del suelo). Tienen la ventaja de poder representar fenómenos espaciales amorfos o con contornos fluídos.
 
 \subsection{Modelos Basados en Objetos} \label{sec:s:obj}
 
@@ -172,14 +170,14 @@ En el modelado basado en objetos, se abstrae información espacial en conjuntos 
 entidades únicas, distinguibles y relevantes llamadas objetos.
 Cada objeto tiene un conjunto de atributos que lo caracterizan, los cuales se dividen en atributos espaciales y no espaciales.
 En el ejemplo del parque nacional, un objeto bosque tiene un atributo espacial, un polígono, que representa su extensión espacial,
-y un atributo no espacial, su espacie dominante, representada como un valor alfanumérico.
+y un atributo no espacial, su especie dominante, representada como un valor alfanumérico.
 Es interesante notar que un objeto puede tener varios atributos espaciales.
 Por ejemplo, un camino puede tener un polígono y una línea, para elegir cuál usar según la escala del mapa.
 
 % Ventajas objetos
-Los modelos de objetos son los mas comunes en problemas relacionados a representar redes de transportes o parcelas de tierra.
-Tienen la ventaja de ser mas intuitivos y cercanos a los modelos Entidad-Relación ya muy presentes en los DBMS más usados.
-En definitiva, la decisión de usar el paradigma funcional o de en objetos se basará en los requerimientos de la aplicación.
+Los modelos de objetos son los más comunes en problemas relacionados a representar redes de transportes o parcelas de tierra.
+Tienen la ventaja de ser más intuitivos y cercanos a los modelos Entidad-Relación ya muy presentes en los DBMS más usados.
+En definitiva, la decisión de usar el paradigma funcional o el basado en objetos dependerá de los requerimientos de la aplicación.
 
 \section{Tipos de Datos y Operaciones Espaciales} \label{sec:s:sdt}
 
@@ -195,11 +193,11 @@ El estándar OGIS propone los siguientes tipos de datos:
     Tiene asociado un sistema de referencia.
     \item Punto: describe la posición de objetos de cero dimensiones,
     como una oficina o una zona de campamento, en el caso del parque nacional.
-    \item Cadena de Lineas: describe un objeto de una dimensión a través de una sucesión de de dos o mas puntos,
+    \item Cadena de Lineas: describe un objeto de una dimensión a través de una sucesión de dos o más puntos,
     que pueden representar un segmento o aproximar una curva. Por ejemplo, caminos o ríos.
     \item Polígono: objetos de 2 dimensiones, como un bosque.
     \item Colección de Geometrías: formas complejas formadas por conjuntos de otros tipos.
-    Se dividen en multipuntos, multilineas y multipoligonos.
+    Se dividen en multipuntos, multilíneas y multipolígonos.
     Estos tipos son necesarios para asegurar que las operaciones geométricas sean cerradas.
     Por ejemplo, la intersección de un río con un bosque de forma cóncava pueden ser representado por un conjunto de líneas.
 \end{itemize}
@@ -208,15 +206,15 @@ El estándar OGIS propone los siguientes tipos de datos:
 
 % Taxonnomía
 En el modelo funcional, las relaciones disponibles quedaban definidas por las funciones de campos del modelo.
-Pero en un modelo basado en objetos, el espacio subyacente será el que determine las operaciones disponsibles
+Pero en un modelo basado en objetos, el espacio subyacente será el que determine las operaciones disponibles
 y las relaciones que pueden existir entre objetos. La siguiente tipología de espacios resume la presentada por \cite{spatial:book}:
 
 \begin{itemize}
-    \item Espacios Orientados a Conjuntos: son los espacios mas simples y generales.
+    \item Espacios Orientados a Conjuntos: son los espacios más simples y generales.
     Permiten todas las relaciones usuales de conjuntos como unión, intersección, contención y pertenencia.
     \item Espacios Topológicos: los espacios topológicos son aquellos en los que las relaciones no se ven afectadas
     por transformaciones elásticas del mismo.
-    \item Espacios Direccionales: las reaciones direccionales de un espacio pueden ser
+    \item Espacios Direccionales: las relaciones direccionales de un espacio pueden ser
     absolutas (en referencia a un sistema de referencia global),
     relativas (basadas en la orientación de un objeto)
     o basadas en un observador (un objeto especial designado como tal).
@@ -269,7 +267,7 @@ Podemos usar el predicado \texttt{Cross} para encontrar todos los paises por los
     WHERE Cross(R.forma, P.forma) = 1
 \end{verbatim}
 
-Por último veamos una consulta mas compleja que combina dos operaciones nuevas. Supongamos que el Río Paraná puede proveer de agua a todas las ciudades a menos de 300km de distancia. Primero, podemos usar \texttt{Buffer} para encontrar el área a 300km de dicho río (esto es una generalización de las envolturas que vimos en la sección \ref{realms:2}) y luego, \texttt{Overlap} para encontrar aquellas ciudades que tienen intersección con esta área.
+Por último veamos una consulta más compleja que combina dos operaciones nuevas. Supongamos que el Río Paraná puede proveer de agua a todas las ciudades a menos de 300km de distancia. Primero, podemos usar \texttt{Buffer} para encontrar el área a 300km de dicho río (esto es una generalización de las envolturas que vimos en la sección \ref{realms:2}) y luego, \texttt{Overlap} para encontrar aquellas ciudades que tienen intersección con esta área.
 
 \begin{verbatim}
     SELECT C.nombre

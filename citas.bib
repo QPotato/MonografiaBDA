@@ -1,3 +1,5 @@
+// spatial
+
 @book{spatial:book,
     author = {Shekhar, Shashi and Chawla, Sanjay},
     year = {2003},
@@ -139,7 +141,6 @@
     publisher="Springer Berlin Heidelberg",
     address="Berlin, Heidelberg",
     pages="181--202",
-    abstract="The search for a better understanding of natural and human phenomena is the main purpose of science. Today, a wide range of operational GIS applications used for scientific research, business and planning illustrates the usefulness of this technology to study characteristics of geographical distributions. However, real world entities are located and are evolving in both space and time. Users are thus quite often unsatisfied with the traditional static two-dimensional, map-oriented representation of nature and want to integrate temporal dimension and modelling of changes within GIS applications. In contrast, environmental modelling deals with the numerical simulation of three-dimensional, (space) time-dependent processes with roots in atmospheric, hydrologic, geologic, soil, biologic, ecological, and other natural sciences (Goodchild et al. 1996). Contemporary simulation modelling emphasises interdisciplinary approaches combining atmospheric, hydrologic and ecological models that can be linked across various temporal and spatial scales to measure, understand and predict interactions between the biosphere and other Earth subsystems. To fulfil these needs, GIS technology, mainly based on the traditional concept of map layers and static databases, has to evolve in two ways:to support open interoperability between systems, using appropriate data structures that can be addressed externally and linked into existing environmental models; andto include functions to handle time, change and events in order to describe real world processes using database technology.",
     isbn="978-3-662-03954-0",
     doi="10.1007/978-3-662-03954-0_10",
     url="https://doi.org/10.1007/978-3-662-03954-0_10"
@@ -153,46 +154,6 @@
       year = {1999},
       abstract = {Nowadays, many applications need data modeling facilities  for the description of complex objects with spatial and/or  temporal facilities. Responses to such requirements may be  found in Geographic Information Systems (GIS), in some  DBMS, or in the research literature. However, most of  existing models cover only partly the requirements (they  address either spatial or temporal modeling), and most are  at the logical level, hence not well suited for database  design. This paper proposes a spatio-temporal modeling  approach at the conceptual level, called MADS. The proposal  stems from the identification of the criteria to be met for  a conceptual model. It is advocated that orthogonality is  the key issue for achieving a powerful and intuitive  conceptual model. Thus, the proposal focuses on  highlighting similarities in the modeling of space and  time, which enhance readability and understandability of  the model.},
       url = {http://infoscience.epfl.ch/record/99112},
-}
-
-@article{spatial:datamining,
-    author = {Chawla, Sanjay and Shekhar, Shashi and Wu, Weili and Özesmi, Uygar},
-    year = {2001},
-    month = {01},
-    pages = {},
-    title = {Modeling Spatial Dependencies for Mining Geospatial Data: An Introduction},
-    journal = {Data Mining and Knowledge Discovery - DATAMINE},
-    doi = {10.4324/9780203468029_chapter_6}
-}
-
-@inproceedings{spatiotemporal:datamining,
-    author = {Zhou, Xun and Shekhar, Shashi and Mohan, Pradeep and Liess, Stefan and Snyder, Peter},
-    year = {2011},
-    month = {11},
-    pages = {44-53},
-    title = {Discovering interesting sub-paths in spatiotemporal datasets: A summary of results},
-    journal = {GIS: Proceedings of the ACM International Symposium on Advances in Geographic Information Systems},
-    doi = {10.1145/2093973.2093981}
-}
-
-@inproceedings{sweeping,
-    author = {Piatov, Danila and Helmer, Sven},
-    year = {2017},
-    month = {08},
-    pages = {125-144},
-    title = {Sweeping-Based Temporal Aggregation},
-    isbn = {978-3-319-64366-3},
-    doi = {10.1007/978-3-319-64367-0_7}
-}
-
-@article{recommendations,
-    author = {Kefalas, Pavlos and Symeonidis, Panagiotis and Manolopoulos, Yannis},
-    year = {2017},
-    month = {04},
-    pages = {},
-    title = {Recommendations based on a heterogeneous spatio-temporal social network},
-    journal = {World Wide Web},
-    doi = {10.1007/s11280-017-0454-0}
 }
 
 @article{CHOROCHRONOS,
@@ -217,11 +178,22 @@
 }
 
 @article{sp:moving2,
-    author = {Güting, Ralf and Böhlen, Michael and Erwig, Martin and Jensen, Christian and Lorentzos, Nikos and Schneider, Markus and Vazirgiannis, Michalis and Guting, Name and Bohlen, Name and Lorentzos, Name and Vazirgiannis, Name},
+    author = {G\"{u}ting, Ralf Hartmut and B\"{o}hlen, Michael H. and Erwig, Martin and Jensen, Christian S. and Lorentzos, Nikos A. and Schneider, Markus and Vazirgiannis, Michalis},
+    title = {A Foundation for Representing and Querying Moving Objects},
     year = {2000},
-    month = {04},
-    pages = {},
-    title = {A Foundation for Representing and Querying Moving Objects}
+    issue_date = {March 2000},
+    publisher = {Association for Computing Machinery},
+    address = {New York, NY, USA},
+    volume = {25},
+    number = {1},
+    issn = {0362-5915},
+    url = {https://doi.org/10.1145/352958.352963},
+    doi = {10.1145/352958.352963},
+    journal = {ACM Trans. Database Syst.},
+    month = mar,
+    pages = {1–42},
+    numpages = {42},
+    keywords = {algebra, moving region, spatio-temporal databases, moving objects, moving point, abstract data types, spatio-temporal data types}
 }
 
 @article{sp:moving3,
@@ -235,7 +207,8 @@
     doi = {10.1093/comjnl/46.6.680}
 }
 
-@inproceedings{sp:most,
+
+@article{sp:most,
     author = {Sistla, A. and Wolfson, Ouri and Chamberlain, Sam and Dao, Son},
     year = {1997},
     month = {05},
@@ -244,6 +217,38 @@
     isbn = {0-8186-7807-0},
     journal = {Proceedings - International Conference on Data Engineering},
     doi = {10.1109/ICDE.1997.581973}
+}
+
+// Estado del arte
+
+@article{spatial:datamining,
+    author = {Chawla, Sanjay and Shekhar, Shashi and Wu, Weili and Özesmi, Uygar},
+    year = {2001},
+    month = {01},
+    pages = {},
+    title = {Modeling Spatial Dependencies for Mining Geospatial Data: An Introduction},
+    journal = {Data Mining and Knowledge Discovery - DATAMINE},
+    doi = {10.4324/9780203468029_chapter_6}
+}
+
+@article{spatiotemporal:datamining,
+    author = {Zhou, Xun and Shekhar, Shashi and Mohan, Pradeep and Liess, Stefan and Snyder, Peter},
+    year = {2011},
+    month = {11},
+    pages = {44-53},
+    title = {Discovering interesting sub-paths in spatiotemporal datasets: A summary of results},
+    journal = {GIS: Proceedings of the ACM International Symposium on Advances in Geographic Information Systems},
+    doi = {10.1145/2093973.2093981}
+}
+
+@article{recommendations,
+    author = {Kefalas, Pavlos and Symeonidis, Panagiotis and Manolopoulos, Yannis},
+    year = {2017},
+    month = {04},
+    pages = {},
+    title = {Recommendations based on a heterogeneous spatio-temporal social network},
+    journal = {World Wide Web},
+    doi = {10.1007/s11280-017-0454-0}
 }
 
 @article{schenider:moving,
@@ -268,7 +273,7 @@
     doi = {10.1016/S1045-926X(02)00057-5}
 }
 
-@article{article,
+@article{climate,
     author = {Dettori, Sandro and Filigheddu, Maria and Deplano, Giovanni and Escamilla-Molgora, Juan and Ruiu, Maddalena and Sedda, Luigi},
     year = {2018},
     month = {12},
@@ -279,7 +284,7 @@
     doi = {10.1038/s41598-018-35319-1}
 }
 
-@inbook{gant:t,
+@article{gant:t,
     author = {Pons, Jose and Pons, Olga and Billiet, Christophe and Tré, Guy},
     year = {2014},
     month = {09},
@@ -290,7 +295,7 @@
     doi = {10.1007/978-3-319-00954-4_9}
 }
 
-@article{gant:st,
+@book{gant:st,
     author = {Caluwe, Rita and Tré, Guy and Bordogna, Gloria},
     year = {2006},
     month = {01},
@@ -299,25 +304,26 @@
 }
 
 @InProceedings{sweeping,
-author="Piatov, Danila
-and Helmer, Sven",
-editor="Gertz, Michael
-and Renz, Matthias
-and Zhou, Xiaofang
-and Hoel, Erik
-and Ku, Wei-Shinn
-and Voisard, Agnes
-and Zhang, Chengyang
-and Chen, Haiquan
-and Tang, Liang
-and Huang, Yan
-and Lu, Chang-Tien
-and Ravada, Siva",
-title="Sweeping-Based Temporal Aggregation",
-booktitle="Advances in Spatial and Temporal Databases",
-year="2017",
-publisher="Springer International Publishing",
-address="Cham",
-pages="125--144",
-isbn="978-3-319-64367-0"
+    author="Piatov, Danila
+    and Helmer, Sven",
+    editor="Gertz, Michael
+    and Renz, Matthias
+    and Zhou, Xiaofang
+    and Hoel, Erik
+    and Ku, Wei-Shinn
+    and Voisard, Agnes
+    and Zhang, Chengyang
+    and Chen, Haiquan
+    and Tang, Liang
+    and Huang, Yan
+    and Lu, Chang-Tien
+    and Ravada, Siva",
+    title="Sweeping-Based Temporal Aggregation",
+    booktitle="Advances in Spatial and Temporal Databases",
+    year="2017",
+    publisher="Springer International Publishing",
+    address="Cham",
+    pages="125--144",
+    abstract="The Timeline Index, which supports temporal joins, time travel, and temporal aggregation on constant intervals, has the potential of becoming a universal index for temporal database systems. Here we present a family of plane-sweeping algorithms that extend the set of operators supported by Timeline-Index-based databases to temporal aggregation on fixed intervals, such as a sliding windows or GROUP BY ROLLUP aggregation, and improve the existing algorithm for computing MIN/MAX temporal aggregates on constant intervals. Our method for selective aggregation relies on a new and very space-efficient data structure called MAX Skyline. In an empirical evaluation we show that our approach is superior to existing techniques, in some cases we improve the performance by orders of magnitude.",
+    isbn="978-3-319-64367-0"
 }

@@ -22,7 +22,7 @@ si bien no son una representación del estado actual de la realidad modelada, re
 
 A lo largo de este capítulo exploraremos estas cuestiones.
 En la sección \ref{sec:dominio:tiempo}, introduciremos algunos conceptos lógica temporal.
-Luego, en la sección \ref{sec:val:trans} exploraremos en mas detalle los dos tiempos que acabamos de introducir
+Luego, en la sección \ref{sec:val:trans} exploraremos en más detalle los dos tiempos que acabamos de introducir
 y que llamaremos tiempo de validez y tiempo de transacción.
 Por último, en la sección \ref{sec:sql2011} veremos como estos conceptos fueron introducidos en el estándar SQL 2011.
 
@@ -36,7 +36,7 @@ cómo se comporta y cómo se observa el tiempo.
 En el capítulo anterior vimos como la investigación de bases de datos espaciales se vio motivada por
 la necesidad práctica de mejorar el manejo de datos de los sistemas GIS.
 Las bases de datos temporales por su parte, fueron fuertemente impactadas por
-la investigación previa en lógica temporal desde de los años 70\textsuperscript{\cite{temporal:status:directions}}
+la investigación previa en lógica temporal de los años 70\textsuperscript{\cite{temporal:status:directions}}
 y que presentaremos a continuación.
 
 \subsection{La estructura del tiempo}
@@ -210,7 +210,7 @@ la sintaxis para hacerlo no cambia en nada respecto a un \texttt{INSERT} tradici
     VALUES (1234, DATE '2013-03-01', DATE '2018-12-20', 1);
 \end{verbatim}
 
-Consideremos ahora la tabla con esta fila y veamos una query un poco mas interesante.
+Consideremos ahora la tabla con esta fila y veamos una query un poco más interesante.
 
 \begin{verbatim}
     UPDATE Estudiantes
@@ -227,7 +227,7 @@ En este caso, el período especificado está contenido en el período de la fila
 
 Pero entonces, ¿Cuál debería ser el nuevo período de validez de la fila actualizada?
 La respuesta es que en realidad, un \texttt{UPDATE} temporal se comporta un poco distinto uno tradicional.
-O, mas precisamente, es una generalización de este.
+O, más precisamente, es una generalización de este.
 Si consideramos que un \texttt{UPDATE} clásico inserta una fila en la tabla por cada una que remueve,
 un \texttt{UPDATE} temporal puede crear varias filas (hasta tres) por cada una que borra.
 En este caso, por ejemplo, el resultado serán tres filas, como vemos en la tabla \ref{tab:update}.
@@ -338,7 +338,7 @@ de \concept{sistema actual} cuando el presente se encuentra dentro de su períod
 e \concept{históricas} en otro caso.
 Obviamente, no pueden realizarse queries \texttt{UPDATE} o \texttt{DELETE} sobre filas históricas.
 
-Las restricciones de integridad, por otro lado, son mas sencillas que en el caso de los períodos de aplicación de usuario:
+Las restricciones de integridad, por otro lado, son más sencillas que en el caso de los períodos de aplicación de usuario:
 cualquier restriccion que es chequeada y se cumple en el sistema actual, heredará la propiedad cuando pase a ser una versión histórica.
 
 El estándar SQL 2011 soporta además bases de datos bitemporales en el sentido definido en al sección \ref{sec:val:trans},

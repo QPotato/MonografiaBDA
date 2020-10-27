@@ -5,7 +5,7 @@
 En este capitulo aplicaremos un enfoque distinto a los capítulos anteriores.
 Para el estudio de las bases de espaciales y temporales fue necesario presentar varios conceptos teóricos,
 la mayoría provenientes de otras ramas científicas, que construyen los cimientos para la implementación de las mismas.
-Luego, presentamos los estándares ya afirmados en cada área, justificando con estos marcos teóricos las decisiones de diseño que se tomo en cada uno.
+Luego, presentamos los estándares ya afirmados en cada área, justificando con estos marcos teóricos las decisiones de diseño que se tomó en cada uno.
 
 En el campo de las \concept{bases de datos espaciotemporales},
 que es como llamaremos a las bases de datos que combinan de alguna forma ambas funcionalidades,
@@ -14,16 +14,16 @@ Debido a la gran amplitud en requerimientos de las distintas aplicaciones,
 existen muchos y variados modelos, cada uno caracterizado por
 qué elementos toma de las funcionalidades espaciales, cuáles de las temporales y como los combina.
 La mayoría de estos modelos se focalizan en una o pocas aplicaciones.
-Si bien existen modelos mas generales, actualmente son muy complejos conceptualmente
+Si bien existen modelos más generales, actualmente son muy complejos conceptualmente
 y no muy fáciles de optimizar para problemas específicos.
 
 Por lo tanto, a lo largo de este capítulo presentaremos brevemente algunos modelos y sus aplicaciones, intercalándolos con conceptos y definiciones cuando sea necesario.
-Para un estudio comparativo mas en profundidad de los distintos modelos, sugerimos recurrir a \cite{sp:litreview}.
+Para un estudio comparativo más en profundidad de los distintos modelos, sugerimos recurrir a \cite{sp:litreview}.
 
 \section{Modelo de Snapshots}
 
 % Propuesta
-Comenzaremos por el \concept{modelo de snapshots}\textsuperscript{\cite{sp:snapshot}}, por ser uno de los mas sencillos conceptualmente.
+Comenzaremos por el \concept{modelo de snapshots}\textsuperscript{\cite{sp:snapshot}}, por ser uno de los más sencillos conceptualmente.
 Este modelo divide los datos en capas temporalmente homogéneas, con un timestamp único.
 De esta manera, muestra el estado de la distribución espacial en diferentes tiempos sin relaciones explícitas entre capas.
 
@@ -31,7 +31,7 @@ De esta manera, muestra el estado de la distribución espacial en diferentes tie
 Es un modelo que si bien representa aspectos espaciales y temporales,
 ambos se encuentran muy separados y no agrega comportamientos complejos.
 Desde el punto de vista espacial,
-podemos pensar el tiempo como un atributo no espacial (en el sentido definido en la sección \ref{subsec:mbo}).
+podemos pensar el tiempo como un atributo no espacial (en el sentido definido en la sección \ref{sec:}).
 Desde el punto de vista temporal,
 a las consultas espaciales podemos agregarle condiciones de tiempo de validez similares a las que vimos en la sección \ref{subsec:pau}.
 
@@ -91,7 +91,7 @@ El siguiente ejemplo presenta el mismo ejemplo de las parcelas de la sección an
 Los tipos nuevos que introduce, como \texttt{mpoint}, \texttt{mline} y \texttt{mregion} son tridimensionales (dos dimensiones espaciales y una temporal). Este modelo pone un fuerte énfasis en tratar de ser general, cerrado y consistente. Sin embargo, publicaciones posteriores como \cite{sp:moving3} analizando la implementación de algoritmos sobre sus tipos de datos evidenciaron que presentan grandes dificultades. Este modelo nunca llegó a una implementación comercial completa.
 
 Un modelo de objetos en movimiento que sí fue implementado fue \concept{MOST (Moving Objects Spatio-Temporal data model)}\textsuperscript{\cite{sp:most}}. Este es un modelo de atributos dinámicos, es decir, atributos que cambian continuamente en función del tiempo sin ser actualizados explícitamente. Esto permite hacer predicciones sobre posiciones (y otras propiedades espaciales) futuras de los objetos en movimiento, guardando atributos derivados como la velocidad. Los autores incluso definen un lenguaje de consulta propio, Future Temporal Logic, pensado para realizar queries sobre los valores de los atributos espaciales en el futuro cercano.
-En este modelo, el resultado de una consulta no depende solo del contenido de la base de datos, sino también del momento en el que esta se realiza.
+En este modelo, el resultado de una consulta no depende solo del contenido de la base de datos, sino también del momento en el cual se realiza.
 
 MOST es ideal cuando las posiciones cambian en forma lineal o según otra función fácil de representar y de computar. Si el fenómeno estudiado modifica su movimiento, la función puede actualizarse a una que represente mejor la nueva trayectoria, pero esto puede representar una operación costosa si este cambio es muy frecuente.
 
